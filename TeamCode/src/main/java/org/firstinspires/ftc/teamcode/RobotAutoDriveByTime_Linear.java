@@ -72,6 +72,7 @@ public class RobotAutoDriveByTime_Linear extends LinearOpMode {
     static final double     FORWARD_SPEED = 0.6;
     static final double     TURN_SPEED    = 0.5;
 
+    int level;
     @Override
     public void runOpMode() {
 
@@ -102,6 +103,13 @@ public class RobotAutoDriveByTime_Linear extends LinearOpMode {
         telemetry.addData("Status", "Ready to run");    //
         telemetry.update();
 
+        Vision vision = new Vision(this, 'r');
+
+        while (!isStarted()) {
+            level = vision.levelIdent('r');
+            telemetry.addData("Score Level: ", level);
+            telemetry.update();
+        }
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 

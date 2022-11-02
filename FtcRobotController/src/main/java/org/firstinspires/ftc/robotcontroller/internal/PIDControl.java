@@ -2,7 +2,7 @@ package org.firstinspires.ftc.robotcontroller.internal;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
 /*
-public class PIDControl(double reference, double state) {
+public class PIDControl(double reference, double state) {/*
 
     double integralSum = 0;
     double Kp = 0;
@@ -23,6 +23,6 @@ public class PIDControl(double reference, double state) {
     double output = (error * Kp) + ( derivative * Kd) + (integralSum * Ki);
     return output;
 
-
+*/
 }
 */
