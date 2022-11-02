@@ -27,7 +27,7 @@ public class GyroCode {
 
         }
     }*/
-
+/*
     @Autonomous(name="CringemacAuto", group="auto")
     public static class hergerBurgerAuto extends LinearOpMode {
 
@@ -255,7 +255,7 @@ public class GyroCode {
                 telemetry.addData("error ", error);
                 //telemetry.addData("p", p);
                 //telemetry.addData("i", i);
-                //telemetry.addData("d", d);*/
+                //telemetry.addData("d", d);
                 telemetry.update();
 
 
@@ -354,4 +354,4 @@ public class GyroCode {
 
         }
     }
-}
+} */
