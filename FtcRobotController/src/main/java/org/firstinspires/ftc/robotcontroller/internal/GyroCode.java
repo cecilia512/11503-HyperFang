@@ -15,8 +15,7 @@ public class GyroCode {
     LinearOpMode opMode;
     Orientation angles;
     Acceleration gravity;
-    BNO055IMU.Parameters parameters;
-
+    BNO055IMU.Parameters parameters;}
    /* public GyroCode(LinearOpMode opMode) throws InterruptedException{
 
        // public double getCurrentGyro(){

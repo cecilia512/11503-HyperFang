@@ -158,7 +158,7 @@ public class RobotTeleopTank_Iterative extends OpMode{
         if ( armDown == 0 ) vexArm.setPower(armUp);
         if ( armUp == 0 )   vexArm.setPower(armDown);
 
-        if ( gamepad1.right_bumper ) 
+        if ( gamepad1.right_bumper )
 
 
         /* Use gamepad left & right Bumpers to open and close the claw
