@@ -18,7 +18,7 @@ public class Sensors {
     Acceleration gravity;
     BNO055IMU.Parameters parameters;
 
-    public Sensors(LinearOpMode opMode) throws InterruptedException{
+    public Sensors(LinearOpMode opMode) throws InterruptedException {
         this.opMode = opMode;
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
@@ -35,7 +35,7 @@ public class Sensors {
     public double getGyroYaw() {
         updateValues();
         double yaw = angles.firstAngle * -1;
-        if(angles.firstAngle < -180)
+        if (angles.firstAngle < -180)
             yaw -= 360;
         return yaw;
     }
@@ -46,7 +46,7 @@ public class Sensors {
         return pitch;
     }
 
-    public double getGyroRoll(){
+    public double getGyroRoll() {
         updateValues();
         double roll = angles.thirdAngle;
         return roll;
@@ -64,7 +64,7 @@ public class Sensors {
         return formatDegrees(AngleUnit.DEGREES.fromUnit(angleUnit, angle));
     }
 
-    String formatDegrees(double degrees){
+    String formatDegrees(double degrees) {
         return String.format(Locale.getDefault(), "%.1f", AngleUnit.DEGREES.normalize(degrees));
     }
 
@@ -80,3 +80,4 @@ public class Sensors {
         else
             return -(360 + (currAngle - origAngle));
     }
+}
