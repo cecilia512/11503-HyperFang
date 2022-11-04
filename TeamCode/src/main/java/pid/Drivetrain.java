@@ -1,14 +1,13 @@
-package internal;
+package pid;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcontroller.internal.Sensors;
 
 public class Drivetrain {
-
+/*
     LinearOpMode opMode;
 
     public double countsPerInch;
@@ -158,11 +157,11 @@ public class Drivetrain {
             opMode.telemetry.addData("changePID", changePID);
             opMode.telemetry.addData("angleDiff: ", angleDiff);
             opMode.telemetry.update();
-             */
+
         }
         stopMotors();
-    }
-
+    }*/
+/*
     public void turnPD(double angle, double p, double d, double timeout){
         time.reset();
         double kP = p / 90;
@@ -242,5 +241,5 @@ public class Drivetrain {
 
 
 
-
+*/
 }

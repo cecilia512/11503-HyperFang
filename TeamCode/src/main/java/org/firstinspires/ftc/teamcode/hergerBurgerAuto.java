@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.robotcontroller.internal;
+package org.firstinspires.ftc.teamcode;
 
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
@@ -6,29 +6,11 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
-public class GyroCode {
 
-    public BNO055IMU gyro;
-    LinearOpMode opMode;
-    Orientation angles;
-    Acceleration gravity;
-    BNO055IMU.Parameters parameters;}
-   /* public GyroCode(LinearOpMode opMode) throws InterruptedException{
-
-       // public double getCurrentGyro(){
-
-      //  }
-
-        public double getTrueDiff(double goalTurn){
-
-        }
-    }*/
-/*
     @Autonomous(name="CringemacAuto", group="auto")
-    public static class hergerBurgerAuto extends LinearOpMode {
+    public class hergerBurgerAuto extends LinearOpMode {
 
         BNO055IMU imu;
         double globalAngle;
@@ -353,4 +335,3 @@ public class GyroCode {
 
         }
     }
-} */
