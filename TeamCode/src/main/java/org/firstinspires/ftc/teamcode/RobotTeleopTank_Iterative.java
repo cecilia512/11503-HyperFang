@@ -78,8 +78,8 @@ public class RobotTeleopTank_Iterative extends OpMode{
         rightFront  = hardwareMap.get(DcMotor.class, "rightFront");
         rightBack   = hardwareMap.get(DcMotor.class, "rightBack");
         leftBack    = hardwareMap.get(DcMotor.class, "leftBack");
-       // vexArm      = hardwareMap.crservo.get("vexArm");
-      //  vexClaw     = hardwareMap.crservo.get("vexClaw");
+        vexArm      = hardwareMap.crservo.get( "vexArm");
+      //exClaw     = hardwareMap.crservo.get("vexClaw");
         //Arm    = hardwareMap.get(s.class, "left_arm"); ****try as sirvo
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
@@ -152,14 +152,15 @@ public class RobotTeleopTank_Iterative extends OpMode{
         rightBack.setPower(rbco);
         rightFront.setPower(rfco);
 
-      /*  double armUp    = gamepad1.right_trigger;
-        double armDown  = -gamepad1.left_trigger;
+        double armUp    = gamepad1.right_trigger * .6;// * TRY .5 oscilloscope
+        double armDown  = -gamepad1.left_trigger * .5;// * 1.5; //.25 IF YOU SEE JERKIN GLOWER POWER, CANNOT GO OVER .85
+
+        telemetry.addData("sirvo right",  "%.2f", armUp);
+        telemetry.addData("sirvo left ",  "%.2f", armDown);
 
         if ( armDown == 0 ) vexArm.setPower(armUp);
         if ( armUp == 0 )   vexArm.setPower(armDown);
 
-        if ( gamepad1.right_bumper )
-*/
 
         /* Use gamepad left & right Bumpers to open and close the claw
         if (gamepad1.right_bumper)
