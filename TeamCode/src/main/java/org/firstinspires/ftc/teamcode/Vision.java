@@ -90,29 +90,50 @@ public class Vision {
         int monkus = 1; //y-val iterator
         xherny = bitmap.getWidth() - 1;
         yherny = bitmap.getHeight() - 1;
+        int mCount = 0;
+        int oCount = 0;
+        int cCount = 0;
 
-        while (!isMagenta(bitmap.getPixel(xherny, yherny)) && !isCyan(bitmap.getPixel(xherny, yherny)) && !isOrange(bitmap.getPixel(xherny, yherny)) && monkus < bitmap.getHeight()) {
+        
+
+        while ( monkus < bitmap.getHeight()) {
             yherny = bitmap.getHeight() - monkus;
             crongemac = 1;
             xherny = bitmap.getWidth() - crongemac;
-            while (!isOrange(bitmap.getPixel(xherny, yherny)) && crongemac < 465) {
+            while (crongemac < 465) {
                 xherny = bitmap.getWidth() - crongemac;
+                if (isMagenta(bitmap.getPixel(xherny,yherny))){
+                    mCount ++;
+                }
+                if (isCyan(bitmap.getPixel(xherny,yherny))){
+                    cCount ++;
+                }
+                if (isOrange(bitmap.getPixel(xherny,yherny))){
+                    oCount ++;
+                }
                 crongemac++;
             }
             monkus++;
             if (monkus >= 470){
-                level = 3;
+                level = 0;
             }
         }
 
-        if (isMagenta(bitmap.getPixel(xherny, yherny))) {
-            level = 1;
+        if (mCount > oCount){
+            if (mCount > cCount){
+                level = 2;
+            }
+            else {
+                level = 1;
+            }
         }
-        else if (isCyan(bitmap.getPixel(xherny, yherny))) {
-            level = 2;
-        }
-        else {
-            level = 3;
+        else{
+            if (cCount > oCount){
+                level = 1;
+            }
+            else{
+                level = 3;
+            }
         }
 
         return level;
