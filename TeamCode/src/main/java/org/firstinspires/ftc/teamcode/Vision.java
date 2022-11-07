@@ -36,14 +36,14 @@ public class Vision {
 
     private final int CYAN_RED_LOW = 0;
     private final int CYAN_RED_HIGH = 75;
-    private final int CYAN_BlUE_LOW = 225; //no need for cyan blue high, because the high is 255
+    private final int CYAN_BlUE_LOW = 175; //no need for cyan blue high, because the high is 255
     private final int CYAN_BlUE_HIGH = 255;
-    private final int CYAN_GREEN_LOW = 225; //same reasoning
+    private final int CYAN_GREEN_LOW = 150; //same reasoning
     private final int CYAN_GREEN_HIGH = 255; //same reasoning
 
-    private final int MAGENTA_RED_LOW = 225;
+    private final int MAGENTA_RED_LOW = 175;
     private final int MAGENTA_RED_HIGH = 255;
-    private final int MAGENTA_BLUE_LOW = 225; //i am assuming the same holds for magenta
+    private final int MAGENTA_BLUE_LOW = 175; //i am assuming the same holds for magenta
     private final int MAGENTA_BLUE_HIGH = 255; //i am assuming the same holds for magenta
     private final int MAGENTA_GREEN_LOW = 0;
     private final int MAGENTA_GREEN_HIGH = 75;
