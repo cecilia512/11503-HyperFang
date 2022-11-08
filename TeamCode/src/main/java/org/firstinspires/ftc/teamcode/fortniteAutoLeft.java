@@ -58,7 +58,9 @@ public class fortniteAutoLeft extends LinearOpMode {
                     mDrive.BL.setPower(-0.5); //left strafe
                     mDrive.FR.setPower(0.5); //left strafe
                     mDrive.BR.setPower(-0.5); //left strafe
-                    sleep(1000);
+                    sleep(1750);
+                    linearMovement(-17, 1.5, 0.0004, 0.00007, 0.000068);
+                    sleep(250);
                     mDrive.BR.setPower(0);
                     mDrive.BL.setPower(0);
                     mDrive.FR.setPower(0);
@@ -131,10 +133,10 @@ public class fortniteAutoLeft extends LinearOpMode {
             }
             else
             {
-                mDrive.FL.setPower(-output);
-                mDrive.FR.setPower(output);
-                mDrive.BL.setPower(-output);
-                mDrive.BR.setPower(output);
+                mDrive.FL.setPower(output);
+                mDrive.FR.setPower(-output);
+                mDrive.BL.setPower(output);
+                mDrive.BR.setPower(-output);
 
             }
         }

@@ -162,12 +162,45 @@ public class RobotTeleopTank_Iterative extends OpMode{
         if ( clawClose == 0 ) vexClaw.setPower(clawOpen);
         if ( clawOpen == 0 )   vexClaw.setPower(clawClose);
 
-        double armPower = -gamepad2.right_stick_y;
-
-        if ( armPower != 0){
+        /*double armPower = 0;
+        if (gamepad2.right_bumper){
+            armPower = -1.0;
             vexArmL.setPower(armPower);
-            vexArmR.setPower(-armPower);
+            vexArmR.setPower(armPower);
+        }
+        else if (gamepad2.left_bumper){
+            armPower = 1.0;
+            vexArmL.setPower(armPower);
+            vexArmR.setPower(armPower);
+        }
+        else{
+            armPower = 0;
+            vexArmL.setPower(armPower);
+            vexArmR.setPower(armPower);
+        }*/
+        /*double armPower = -gamepad2.right_stick_y;
+
+        if ( armPower != 0 && !gamepad2.b){
+            if (gamepad2.b) armPower = 0;
+            vexArmL.setPower( armPower * .8);
+            vexArmR.setPower(-armPower * .8);
             telemetry.addData("armpower ",  "%.2f", armPower);
+        }*/
+
+        if (gamepad2.right_bumper || gamepad2.left_bumper){
+            double liftPower = 0;
+            if (gamepad2.dpad_down){
+                liftPower = -1.0;
+            }
+            else if (gamepad2.dpad_up){
+                liftPower = 1.0;
+            }
+            else{
+                liftPower = 0;
+            }
+            vexArmL.setPower(liftPower);
+            vexArmR.setPower(liftPower);
+            telemetry.addData("armpower ",  "%.2f", liftPower);
         }
 
 
