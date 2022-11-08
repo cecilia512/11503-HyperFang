@@ -27,26 +27,26 @@ public class Vision {
     private static final boolean PHONE_IS_PORTRAIT = false;
     private static final String VUFORIA_KEY = "AcELeNr/////AAABmeg7NUNcDkPigDGNImdu5slLREdKn/q+qfajHBypycR0JUZYbfU0q2yZeSud79LJ2DS9uhr7Gu0xDM0DQZ36GRQDgMRwB8lf9TGZFQcoHq4kVAjAoEByEorXCzQ54ITCextAucpL2njKT/1IJxgREr6/axNEL2evyKSpOKoNOISKR6tkP6H3Ygd+FHm2tF/rsUCJHN5bTXrbRbwt5t65O7oJ6Wm8Foz1npbFI0bsD60cug4CpC/Ovovt2usxIRG8cpoQX49eA2jPRRLGXN8y1Nhh9Flr0poOkYoCExWo2iVunAGOwuCdB/rp/+2rkLBfWPvzQzrN9yBBP0JVJZ4biNQ41qqiuVvlc31O9xEvbKHt";
 
-    private final int RED_LOW = 165; //i guess we can steal this for orange detection
-    private final int GREEN_LOW = 74;
-    private final int BLUE_LOW = 4;
-    private final int RED_HIGH = 197;
-    private final int GREEN_HIGH = 107;
-    private final int BLUE_HIGH = 54;
+    private final int RED_LOW = 100; //i guess we can steal this for orange detection
+    private final int GREEN_LOW = 50;
+    private final int BLUE_LOW = 20;
+    private final int RED_HIGH = 120;
+    private final int GREEN_HIGH = 70;
+    private final int BLUE_HIGH = 40;
 
-    private final int CYAN_RED_LOW = 0;
-    private final int CYAN_RED_HIGH = 75;
-    private final int CYAN_BlUE_LOW = 175; //no need for cyan blue high, because the high is 255
-    private final int CYAN_BlUE_HIGH = 255;
-    private final int CYAN_GREEN_LOW = 150; //same reasoning
-    private final int CYAN_GREEN_HIGH = 255; //same reasoning
+    private final int CYAN_RED_LOW = 30;
+    private final int CYAN_RED_HIGH = 50;
+    private final int CYAN_BlUE_LOW = 120; //no need for cyan blue high, because the high is 255
+    private final int CYAN_BlUE_HIGH = 146;
+    private final int CYAN_GREEN_LOW = 90; //same reasoning
+    private final int CYAN_GREEN_HIGH = 110; //same reasoning
 
-    private final int MAGENTA_RED_LOW = 175;
-    private final int MAGENTA_RED_HIGH = 255;
-    private final int MAGENTA_BLUE_LOW = 175; //i am assuming the same holds for magenta
-    private final int MAGENTA_BLUE_HIGH = 255; //i am assuming the same holds for magenta
-    private final int MAGENTA_GREEN_LOW = 0;
-    private final int MAGENTA_GREEN_HIGH = 75;
+    private final int MAGENTA_RED_LOW = 130;
+    private final int MAGENTA_RED_HIGH = 150;
+    private final int MAGENTA_BLUE_LOW = 65; //i am assuming the same holds for magenta
+    private final int MAGENTA_BLUE_HIGH = 85; //i am assuming the same holds for magenta
+    private final int MAGENTA_GREEN_LOW = 20;
+    private final int MAGENTA_GREEN_HIGH = 46;
 
 
     public Vision(LinearOpMode opMode, char side) {
@@ -112,7 +112,10 @@ public class Vision {
                     oCount ++;
                 }
                 crongemac++;
+                crongemac++;
+                crongemac++;
             }
+            monkus++;
             monkus++;
             if (monkus >= 470){
                 level = 0;

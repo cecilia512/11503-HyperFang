@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 
-    @Autonomous(name="CringemacAuto", group="auto")
+    @Autonomous(name="hergerBurger", group="auto")
     public class hergerBurgerAuto extends LinearOpMode {
 
         BNO055IMU imu;
@@ -44,9 +44,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
             Vision vision = new Vision(this, 'r');
 
-            while (!isStarted()) {
+            while (!isStarted() ) {
                 level = vision.levelIdent('r');
-                telemetry.addData("Score Level: ", level);
+                telemetry.addData("",level);
                 telemetry.update();
             }
 
@@ -332,6 +332,5 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
             mDrive.freeze();
             telemetry.addData("movement", " done.");
             telemetry.update();
-
         }
     }

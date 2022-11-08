@@ -72,7 +72,7 @@ public class RobotAutoDriveByTime_Linear extends LinearOpMode {
     static final double     FORWARD_SPEED = 0.6;
     static final double     TURN_SPEED    = 0.5;
 
-    int level;
+    String level;
     @Override
     public void runOpMode() {
 
