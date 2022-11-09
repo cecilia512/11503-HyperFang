@@ -59,8 +59,9 @@ public class RobotTeleopTank_Iterative extends OpMode{
     public DcMotor  rightFront;
     public DcMotor  rightBack;
     public DcMotor  leftBack;
-    public CRServo  vexArmL;
-    public CRServo  vexArmR;
+    public DcMotor  tempArm;
+    //public CRServo  vexArmL;
+    //public CRServo  vexArmR;
     public CRServo  vexClaw;
 
     double clawOffset = 0;
@@ -79,8 +80,9 @@ public class RobotTeleopTank_Iterative extends OpMode{
         rightFront  = hardwareMap.get(DcMotor.class, "rightFront");
         rightBack   = hardwareMap.get(DcMotor.class, "rightBack");
         leftBack    = hardwareMap.get(DcMotor.class, "leftBack");
-        vexArmL     = hardwareMap.crservo.get( "vexArmL");
-        vexArmR     = hardwareMap.crservo.get("vexArmR");
+        //vexArmL     = hardwareMap.crservo.get( "vexArmL");
+        //vexArmR     = hardwareMap.crservo.get("vexArmR");
+        tempArm     = hardwareMap.get(DcMotor.class, "tempArm");
         vexClaw     = hardwareMap.crservo.get("vexClaw");
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
@@ -187,21 +189,38 @@ public class RobotTeleopTank_Iterative extends OpMode{
             telemetry.addData("armpower ",  "%.2f", armPower);
         }*/
 
-        if (gamepad2.right_bumper || gamepad2.left_bumper){
-            double liftPower = 0;
-            if (gamepad2.dpad_down){
-                liftPower = -1.0;
+        if(gamepad2.right_stick_y != 0){
+            double yVal = gamepad2.right_stick_y;
+            double liftPower;
+            if (yVal < -0.4 ){
+                liftPower = -0.6;
             }
-            else if (gamepad2.dpad_up){
-                liftPower = 1.0;
+            else if (yVal > 0.4){
+                liftPower = 0.6;
             }
             else{
                 liftPower = 0;
             }
-            vexArmL.setPower(liftPower);
-            vexArmR.setPower(liftPower);
-            telemetry.addData("armpower ",  "%.2f", liftPower);
+            tempArm.setPower(liftPower);
         }
+
+
+        /*if (gamepad2.right_bumper || gamepad2.left_bumper){
+            double liftPower = 0;
+            if (gamepad2.dpad_down){
+                liftPower = -.6;
+            }
+            else if (gamepad2.dpad_up){
+                liftPower = .6;
+            }
+            else{
+                liftPower = 0;
+            }
+            //vexArmL.setPower(liftPower);
+            //vexArmR.setPower(liftPower);
+            tempArm.setPower(liftPower);
+            telemetry.addData("armpower ",  "%.2f", liftPower);
+        }*/
 
 
 
