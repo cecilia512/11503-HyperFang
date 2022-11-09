@@ -129,12 +129,15 @@ public class RobotTeleopTank_Iterative extends OpMode{
         double horizontal;
         double vert;
         double turn;
+        double tog = 1.00;
 
         // Run wheels in tank mode (note: The joystick goes negative when pushed forward, so negate it)
 
        /* if ( gamepad1.a){
 
         }*/
+        if(gamepad1.right_bumper) {tog = .6;} //maybe switch to speed - trigger
+        if(gamepad1.left_bumper) {tog = 1.00;}
 
         horizontal =  0.7 * gamepad1.left_stick_x;
         vert  = -.7 * gamepad1.left_stick_y;
@@ -150,10 +153,10 @@ public class RobotTeleopTank_Iterative extends OpMode{
         double rbco = rb; //- 0.12 + (.35 / ( rb + 0.6));
         double rfco = rf; // - 0.12 + (.35 / ( rf + 0.6));
 
-        leftBack.setPower(lbco);
-        leftFront.setPower(lfco);
-        rightBack.setPower(rbco);
-        rightFront.setPower(rfco);
+        leftBack.setPower(tog*lbco);
+        leftFront.setPower(tog*lfco);
+        rightBack.setPower(tog*rbco);
+        rightFront.setPower(tog*rfco);
 
         double clawOpen    = gamepad2.right_trigger * .6;// * TRY .5 oscilloscope
         double clawClose  = -gamepad2.left_trigger * .5;// * 1.5; //.25 IF YOU SEE JERKIN GLOWER POWER, CANNOT GO OVER .85
@@ -189,17 +192,23 @@ public class RobotTeleopTank_Iterative extends OpMode{
             telemetry.addData("armpower ",  "%.2f", armPower);
         }*/
 
+
+
         if(gamepad2.right_stick_y != 0){
             double yVal = gamepad2.right_stick_y;
             double liftPower;
-            if (yVal < -0.4 ){
-                liftPower = -0.6;
+
+            if (yVal < 0 ){
+                liftPower = -gamepad2.right_stick_y * 0.7;
+                telemetry.addData("Liftpower: ", "%.2f", liftPower);
             }
-            else if (yVal > 0.4){
-                liftPower = 0.6;
+            else if (yVal > 0) {
+                liftPower = -gamepad2.right_stick_y * 0.7;
+                telemetry.addData("Liftpower: ", "%.2f", liftPower);
             }
             else{
                 liftPower = 0;
+                telemetry.addData("Liftpower: ", "%.2f", liftPower);
             }
             tempArm.setPower(liftPower);
         }
