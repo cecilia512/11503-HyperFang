@@ -130,6 +130,7 @@ public class RobotTeleopTank_Iterative extends OpMode{
         double vert;
         double turn;
         double tog = 1.00;
+        double tog2 = 1.00;
 
         // Run wheels in tank mode (note: The joystick goes negative when pushed forward, so negate it)
 
@@ -138,6 +139,8 @@ public class RobotTeleopTank_Iterative extends OpMode{
         }*/
         if(gamepad1.right_bumper) {tog = .6;} //maybe switch to speed - trigger
         if(gamepad1.left_bumper) {tog = 1.00;}
+        if(gamepad2.right_bumper) {tog = .75;} //maybe switch to speed - trigger
+        if(gamepad2.left_bumper) {tog = 1.00;}
 
         horizontal =  0.7 * gamepad1.left_stick_x;
         vert  = -.7 * gamepad1.left_stick_y;
@@ -199,11 +202,11 @@ public class RobotTeleopTank_Iterative extends OpMode{
             double liftPower;
 
             if (yVal < 0 ){
-                liftPower = gamepad2.right_stick_y * 0.7;
+                liftPower = gamepad2.right_stick_y * 0.65 * tog2;
                 telemetry.addData("Liftpower: ", "%.2f", liftPower);
             }
             else if (yVal > 0) {
-                liftPower = gamepad2.right_stick_y * 0.7;
+                liftPower = gamepad2.right_stick_y * 0.65 * tog2;
                 telemetry.addData("Liftpower: ", "%.2f", liftPower);
             }
             else{
