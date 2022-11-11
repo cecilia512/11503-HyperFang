@@ -96,7 +96,7 @@ public class Vision {
 
         
 
-        while ( monkus < bitmap.getHeight()) {
+        for (monkus = 1; monkus < bitmap.getHeight(); monkus += 2) {
             yherny = bitmap.getHeight() - monkus;
             crongemac = 1;
             xherny = bitmap.getWidth() - crongemac;
@@ -111,13 +111,9 @@ public class Vision {
                 if (isOrange(bitmap.getPixel(xherny,yherny))){
                     oCount ++;
                 }
-                crongemac++;
-                crongemac++;
-                crongemac++;
+                crongemac += 3;
             }
-            monkus++;
-            monkus++;
-            if (monkus >= 470){
+            if (monkus >= 470) {
                 level = 0;
             }
         }
