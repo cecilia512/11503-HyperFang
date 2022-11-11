@@ -199,11 +199,11 @@ public class RobotTeleopTank_Iterative extends OpMode{
             double liftPower;
 
             if (yVal < 0 ){
-                liftPower = -gamepad2.right_stick_y * 0.7;
+                liftPower = gamepad2.right_stick_y * 0.7;
                 telemetry.addData("Liftpower: ", "%.2f", liftPower);
             }
             else if (yVal > 0) {
-                liftPower = -gamepad2.right_stick_y * 0.7;
+                liftPower = gamepad2.right_stick_y * 0.7;
                 telemetry.addData("Liftpower: ", "%.2f", liftPower);
             }
             else{
