@@ -61,7 +61,7 @@ public class bingChillingMinecraftAuto extends LinearOpMode {
                     sleep(1050);
                     linearMovement(-10, 1.5, 0.0004, 0.00007, 0.000068);
                     sleep(250);
-                    linearMovement(21, 1.5, 0.0004, 0.00007, 0.000068);
+                    linearMovement(19, 1.5, 0.0004, 0.00007, 0.000068);
                     sleep(250);
                     mDrive.BR.setPower(0);
                     mDrive.BL.setPower(0);
@@ -69,7 +69,7 @@ public class bingChillingMinecraftAuto extends LinearOpMode {
                     mDrive.FL.setPower(0);
                     break;
                 case 2:
-                    linearMovement(21, 1.5, 0.0004, 0.00007, 0.000068);
+                    linearMovement(19, 1.5, 0.0004, 0.00007, 0.000068);
                     sleep(250);
                     mDrive.BR.setPower(0);
                     mDrive.BL.setPower(0);
@@ -84,7 +84,7 @@ public class bingChillingMinecraftAuto extends LinearOpMode {
                     sleep(1000);
                     linearMovement(-10, 1.5, 0.0004, 0.00007, 0.000068);
                     sleep(250);
-                    linearMovement(21, 1.5, 0.0004, 0.00007, 0.000068);
+                    linearMovement(19, 1.5, 0.0004, 0.00007, 0.000068);
                     sleep(250);
                     mDrive.BR.setPower(0);
                     mDrive.BL.setPower(0);
