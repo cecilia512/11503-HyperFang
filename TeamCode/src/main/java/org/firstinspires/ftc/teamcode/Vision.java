@@ -27,12 +27,12 @@ public class Vision {
     private static final boolean PHONE_IS_PORTRAIT = false;
     private static final String VUFORIA_KEY = "AcELeNr/////AAABmeg7NUNcDkPigDGNImdu5slLREdKn/q+qfajHBypycR0JUZYbfU0q2yZeSud79LJ2DS9uhr7Gu0xDM0DQZ36GRQDgMRwB8lf9TGZFQcoHq4kVAjAoEByEorXCzQ54ITCextAucpL2njKT/1IJxgREr6/axNEL2evyKSpOKoNOISKR6tkP6H3Ygd+FHm2tF/rsUCJHN5bTXrbRbwt5t65O7oJ6Wm8Foz1npbFI0bsD60cug4CpC/Ovovt2usxIRG8cpoQX49eA2jPRRLGXN8y1Nhh9Flr0poOkYoCExWo2iVunAGOwuCdB/rp/+2rkLBfWPvzQzrN9yBBP0JVJZ4biNQ41qqiuVvlc31O9xEvbKHt";
 
-    private final int RED_LOW = 100; //i guess we can steal this for orange detection
-    private final int GREEN_LOW = 50;
-    private final int BLUE_LOW = 20;
-    private final int RED_HIGH = 120;
-    private final int GREEN_HIGH = 70;
-    private final int BLUE_HIGH = 40;
+    private final int RED_LOW = 90; //i guess we can steal this for orange detection
+    private final int GREEN_LOW = 131; //hello future me here its actually like vomit green now
+    private final int BLUE_LOW = 95; //red of 125, green 225, blue is 0
+    private final int RED_HIGH = 107;
+    private final int GREEN_HIGH = 151;
+    private final int BLUE_HIGH = 115;
 
     private final int CYAN_RED_LOW = 30;
     private final int CYAN_RED_HIGH = 50;
@@ -41,7 +41,7 @@ public class Vision {
     private final int CYAN_GREEN_LOW = 90; //same reasoning
     private final int CYAN_GREEN_HIGH = 110; //same reasoning
 
-    private final int MAGENTA_RED_LOW = 130;
+    private final int MAGENTA_RED_LOW = 128;
     private final int MAGENTA_RED_HIGH = 150;
     private final int MAGENTA_BLUE_LOW = 65; //i am assuming the same holds for magenta
     private final int MAGENTA_BLUE_HIGH = 85; //i am assuming the same holds for magenta
@@ -91,7 +91,7 @@ public class Vision {
         xherny = bitmap.getWidth() - 1;
         yherny = bitmap.getHeight() - 1;
         int mCount = 0;
-        int oCount = 0;
+        int gCount = 0;
         int cCount = 0;
 
         
@@ -109,7 +109,7 @@ public class Vision {
                     cCount ++;
                 }
                 if (isOrange(bitmap.getPixel(xherny,yherny))){
-                    oCount ++;
+                    gCount ++;
                 }
                 crongemac += 3;
             }
@@ -118,7 +118,7 @@ public class Vision {
             }
         }
 
-        if (mCount > oCount){
+        if (mCount > gCount){
             if (mCount > cCount){
                 level = 2;
             }
@@ -127,7 +127,7 @@ public class Vision {
             }
         }
         else{
-            if (cCount > oCount){
+            if (cCount > gCount){
                 level = 1;
             }
             else{
