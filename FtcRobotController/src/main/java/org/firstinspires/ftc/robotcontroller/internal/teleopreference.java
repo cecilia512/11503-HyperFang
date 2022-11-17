@@ -1,6 +1,6 @@
 
 
-package Opmode;
+//package Opmode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -9,9 +9,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
-
+/*
 @TeleOp(name="TeleOp", group="4546")
-public class Teleop extends LinearOpMode {
+public class teleopreference extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
@@ -110,7 +110,7 @@ public class Teleop extends LinearOpMode {
 //////////////////////////////////////////////////////////////////////////////////////////////////
             POSSIBLE FUTURE CHANGES:
             Single button Macro
-             */
+
 
             // Driving [arcade mode]
             if (Math.abs(gamepad1.left_stick_y) > .05 || Math.abs(gamepad1.left_stick_x) > .05 || Math.abs(gamepad1.right_stick_x) > .05) {
@@ -172,7 +172,7 @@ public class Teleop extends LinearOpMode {
 //////////////////////////////////////////////////////////////////////////////////////////////////
             POSSIBLE FUTURE CHANGES:
             Test and set TRUE position for servo wrist. Possibly servo programmer.
-             */
+
 
             // If the right trigger of Driver 2 is pressed past a threshold, the arm will extend out,
             // if the left trigger is pressed, the arm will retract back down. Otherwise rest.
@@ -257,9 +257,9 @@ public class Teleop extends LinearOpMode {
             /*telemetry.addData("sArm pos:", shippingArm.getPosition());
             telemetry.addData("hArm pos:", hook.getPosition());
             telemetry.addData("sPos:", sPos);
-            telemetry.addData("hPos:", hPos);*/
+            telemetry.addData("hPos:", hPos);
             telemetry.addData("State: ", liftState);
             telemetry.update();
         }
-    }
-}
+    }*/
+//}

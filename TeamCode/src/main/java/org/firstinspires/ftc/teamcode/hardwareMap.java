@@ -10,10 +10,10 @@ public class hardwareMap {
 
     HardwareMap hardwareMap;
 
-    public DcMotor FL; //port 0
-    public DcMotor FR; //port 1
-    public DcMotor BL; //port 2
-    public DcMotor BR; //port 3
+    public DcMotorEx FL; //port 0
+    public DcMotorEx FR; //port 1
+    public DcMotorEx BL; //port 2
+    public DcMotorEx BR; //port 3
     public DcMotorEx Filler1, Filler2;
     public DcMotor Laft; //port 0 ExpansionHub 40:1
     public CRServo InOut; //port _
@@ -23,10 +23,11 @@ public class hardwareMap {
 
     public void init(HardwareMap h) {
         hardwareMap = h;
-        BR = hardwareMap.get(DcMotor.class, "rightBack");
-        FR = hardwareMap.get(DcMotor.class, "rightFront");
-        FL = hardwareMap.get(DcMotor.class, "leftFront");
-        BL = hardwareMap.get(DcMotor.class, "leftBack");
+        BR = hardwareMap.get(DcMotorEx.class, "rightBack");
+        FR = hardwareMap.get(DcMotorEx.class, "rightFront");
+        FL = hardwareMap.get(DcMotorEx.class, "leftFront");
+        BL = hardwareMap.get(DcMotorEx.class, "leftBack");
+
 
       //  Laft = hardwareMap.get(DcMotor.class, "L1"); //lift motor imo
       //  InOut = hardwareMap.get(CRServo.class, "IO1"); //intake\outtake motor

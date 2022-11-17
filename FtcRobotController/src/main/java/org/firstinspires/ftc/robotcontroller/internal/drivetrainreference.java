@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-public class drivetrainreference {
+public class drivetrainreference {/*
 
     LinearOpMode opMode;
 
@@ -15,10 +15,10 @@ public class drivetrainreference {
     private DcMotor motorFR;
     private DcMotor motorBL;
     private DcMotor motorBR;
-  //  private Sensors sensor;
+    //  private Sensors sensor;
     ElapsedTime time;
 
-    public Drivetrain(LinearOpMode opMode) throws InterruptedException {
+    public void Drivetrain(LinearOpMode opMode) throws InterruptedException {
         this.opMode = opMode;
         motorFL = this.opMode.hardwareMap.dcMotor.get("fL");
         motorFR = this.opMode.hardwareMap.dcMotor.get("fR");
@@ -29,9 +29,9 @@ public class drivetrainreference {
         motorFR.setDirection(DcMotorSimple.Direction.FORWARD);
         motorBL.setDirection(DcMotorSimple.Direction.REVERSE);
         motorBR.setDirection(DcMotorSimple.Direction.FORWARD);
-        countsPerInch = EncodersPerInch(560, .5, (75/25.4));
+        countsPerInch = EncodersPerInch(560, .5, (75 / 25.4));
         time = new ElapsedTime();
-     //   sensor = new Sensors(this.opMode);
+        //   sensor = new Sensors(this.opMode);
     }
 
     public void startMotors(double left, double right) {
@@ -52,11 +52,11 @@ public class drivetrainreference {
         startMotors(power, power);
     }
 
-    public double EncodersPerInch(double encoders, double gearReduction, double wheelDiameter){
-        return ((encoders * gearReduction) /(wheelDiameter * Math.PI) );
+    public double EncodersPerInch(double encoders, double gearReduction, double wheelDiameter) {
+        return ((encoders * gearReduction) / (wheelDiameter * Math.PI));
     }
 
-    public void resetEncoders(){
+    public void resetEncoders() {
         motorFL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         opMode.idle();
         motorFR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -76,7 +76,7 @@ public class drivetrainreference {
         opMode.idle();
     }
 
-    public void setDTBrake(){
+    public void setDTBrake() {
         motorFL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         opMode.idle();
         motorFR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -87,7 +87,7 @@ public class drivetrainreference {
         opMode.idle();
     }
 
-    public void setDTFloat(){
+    public void setDTFloat() {
         motorFL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         opMode.idle();
         motorFR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
@@ -98,18 +98,18 @@ public class drivetrainreference {
         opMode.idle();
     }
 
-    public double getEncoderAvg(){
+    public double getEncoderAvg() {
         int count = 4;
-        if (motorFL.getCurrentPosition() == 0){
+        if (motorFL.getCurrentPosition() == 0) {
             count--;
         }
-        if (motorFR.getCurrentPosition() == 0){
+        if (motorFR.getCurrentPosition() == 0) {
             count--;
         }
-        if (motorBL.getCurrentPosition() == 0){
+        if (motorBL.getCurrentPosition() == 0) {
             count--;
         }
-        if (motorBR.getCurrentPosition() == 0){
+        if (motorBR.getCurrentPosition() == 0) {
             count--;
         }
         if (count == 0) count++;
@@ -119,17 +119,17 @@ public class drivetrainreference {
                 Math.abs(motorBR.getCurrentPosition())) / count;
     }
 
-    public void moveInches(double inches, double power){
+    public void moveInches(double inches, double power) {
         resetEncoders();
-        while (getEncoderAvg() < inches * countsPerInch && opMode.opModeIsActive()){
+        while (getEncoderAvg() < inches * countsPerInch && opMode.opModeIsActive()) {
             startMotors(power, power);
         }
         stopMotors();
     }
 
-    public void moveTime(int millis, double power){
+    public void moveTime(int millis, double power) {
         time.reset();
-        while (time.milliseconds() < millis){
+        while (time.milliseconds() < millis) {
             startMotors(power, power);
         }
         stopMotors();
@@ -141,13 +141,12 @@ public class drivetrainreference {
         final double angleDiff = angle - startPos; // desired angle - initial angle = difference
         double deltaAngle = sensor.getTrueDiff(angle); // difference in current and desired angle (negative if need to turn left and positive if need to turn right)
         double changePID = 0; // the power we will apply to our motors
-        while(Math.abs(deltaAngle) > .3){
+        while (Math.abs(deltaAngle) > .3) {
             deltaAngle = sensor.getTrueDiff(angle);
-            changePID = ((deltaAngle/Math.abs(angleDiff)) * kP); // As we get closer to the desired angle, the value that is multiplied with kP is decreased (we won't overshoot)
-            if (changePID < 0){ // if this value is negative (need to turn left)
-                startMotors(changePID - .075 , -changePID + .075); // turn method for going left (left side turns backwards and right side turns forward)
-            }
-            else{ // if changePID is positive (need to turn right)
+            changePID = ((deltaAngle / Math.abs(angleDiff)) * kP); // As we get closer to the desired angle, the value that is multiplied with kP is decreased (we won't overshoot)
+            if (changePID < 0) { // if this value is negative (need to turn left)
+                startMotors(changePID - .075, -changePID + .075); // turn method for going left (left side turns backwards and right side turns forward)
+            } else { // if changePID is positive (need to turn right)
                 startMotors(changePID + .075, -changePID - .075); // turn method for going right (left side turns forward and right side turns backward)
             }
             // the constants that are added or subtracted with changePID in startMotors allow the motors to turn when the value of changePID becomes small
@@ -156,12 +155,12 @@ public class drivetrainreference {
             opMode.telemetry.addData("changePID", changePID);
             opMode.telemetry.addData("angleDiff: ", angleDiff);
             opMode.telemetry.update();
-             */
+
         }
-        stopMotors();
+        //stopMotors();
     }
 
-    public void turnPD(double angle, double p, double d, double timeout){
+    public void turnPD(double angle, double p, double d, double timeout) {
         time.reset();
         double kP = p / 90;
         double kD = d;
@@ -238,6 +237,5 @@ public class drivetrainreference {
 
     }
 
-
-
-
+*/
+}

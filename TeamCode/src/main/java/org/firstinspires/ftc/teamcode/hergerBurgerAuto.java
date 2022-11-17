@@ -4,7 +4,9 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
@@ -18,6 +20,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
         hardwareMap mDrive = new hardwareMap();
 
+
         public final double WHEEL_DIAMETER = 4.0; //Wheel diameter in inches
         public final int MOTOR_GEAR_TEETH = 1; //# of teeth on the motor gear
         public final int WHEEL_GEAR_TEETH = 15; //# of teeth on the wheel gear
@@ -30,6 +33,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
         @Override
         public void runOpMode() throws InterruptedException {
+            mDrive.BR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            mDrive.FR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            mDrive.FL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            mDrive.BL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
 
             parameters.mode = BNO055IMU.SensorMode.IMU;
@@ -56,41 +63,41 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
                     case 1:
                         linearMovement(17.25,1.5, 0.0004, 0.00007, 0.000068);
                         sleep(250);
-                        mDrive.FL.setPower(0.5); //left strafe
-                        mDrive.BL.setPower(-0.5); //left strafe
-                        mDrive.FR.setPower(0.5); //left strafe
-                        mDrive.BR.setPower(-0.5); //left strafe
+                        mDrive.FL.setVelocity(100); //left strafe
+                        mDrive.BL.setVelocity(-100); //left strafe
+                        mDrive.FR.setVelocity(100); //left strafe
+                        mDrive.BR.setVelocity(-100); //left strafe
                         sleep(1000);
-                        mDrive.BR.setPower(0);
-                        mDrive.BL.setPower(0);
-                        mDrive.FR.setPower(0);
-                        mDrive.FL.setPower(0);
+                        mDrive.BR.setVelocity(0);
+                        mDrive.BL.setVelocity(0);
+                        mDrive.FR.setVelocity(0);
+                        mDrive.FL.setVelocity(0);
                         break;
                     case 2:
                         linearMovement(16.25,1.5, 0.0004, 0.00007, 0.000068);
                         sleep(595);
-                        mDrive.FL.setPower(0.5); //left strafe
-                        mDrive.BL.setPower(-0.5); //left strafe
-                        mDrive.FR.setPower(0.5); //left strafe
-                        mDrive.BR.setPower(-0.5); //left strafe
+                        mDrive.FL.setVelocity(100); //left strafe
+                        mDrive.BL.setVelocity(-100); //left strafe
+                        mDrive.FR.setVelocity(100); //left strafe
+                        mDrive.BR.setVelocity(-100); //left strafe
                         sleep(1000);
-                        mDrive.BR.setPower(0);
-                        mDrive.BL.setPower(0);
-                        mDrive.FR.setPower(0);
-                        mDrive.FL.setPower(0);
+                        mDrive.BR.setVelocity(0);
+                        mDrive.BL.setVelocity(0);
+                        mDrive.FR.setVelocity(0);
+                        mDrive.FL.setVelocity(0);
                         break;
                     default:
                         linearMovement(16.5,1.5, 0.0004, 0.00007, 0.000068);
                         sleep(595);
-                        mDrive.FL.setPower(0.5); //left strafe
-                        mDrive.BL.setPower(-0.5); //left strafe
-                        mDrive.FR.setPower(0.5); //left strafe
-                        mDrive.BR.setPower(-0.5); //left strafe
+                        mDrive.FL.setVelocity(100); //left strafe
+                        mDrive.BL.setVelocity(-100); //left strafe
+                        mDrive.FR.setVelocity(100); //left strafe
+                        mDrive.BR.setVelocity(-100); //left strafe
                         sleep(1000);
-                        mDrive.BR.setPower(0);
-                        mDrive.BL.setPower(0);
-                        mDrive.FR.setPower(0);
-                        mDrive.FL.setPower(0);
+                        mDrive.BR.setVelocity(0);
+                        mDrive.BL.setVelocity(0);
+                        mDrive.FR.setVelocity(0);
+                        mDrive.FL.setVelocity(0);
                         break;
                 }
             }
