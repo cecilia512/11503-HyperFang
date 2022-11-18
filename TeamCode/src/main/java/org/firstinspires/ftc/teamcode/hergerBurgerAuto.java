@@ -33,10 +33,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
         @Override
         public void runOpMode() throws InterruptedException {
-            mDrive.BR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+          /*  mDrive.BR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
             mDrive.FR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
             mDrive.FL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-            mDrive.BL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+            mDrive.BL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);*/
             BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
 
             parameters.mode = BNO055IMU.SensorMode.IMU;
@@ -51,10 +51,14 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
             Vision vision = new Vision(this, 'r');
 
+            telemetry.addData("MODE: ",mDrive.FR.getMode());
+            telemetry.update();
+
             while (!isStarted() ) {
                 level = vision.levelIdent('r');
                 telemetry.addData("",level);
                 telemetry.update();
+
             }
 
             waitForStart();
@@ -63,10 +67,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
                     case 1:
                         linearMovement(17.25,1.5, 0.0004, 0.00007, 0.000068);
                         sleep(250);
-                        mDrive.FL.setVelocity(100); //left strafe
-                        mDrive.BL.setVelocity(-100); //left strafe
-                        mDrive.FR.setVelocity(100); //left strafe
-                        mDrive.BR.setVelocity(-100); //left strafe
+                        mDrive.FL.setVelocity(1000); //left strafe
+                        mDrive.BL.setVelocity(-1000); //left strafe
+                        mDrive.FR.setVelocity(1000); //left strafe
+                        mDrive.BR.setVelocity(-1000); //left strafe
                         sleep(1000);
                         mDrive.BR.setVelocity(0);
                         mDrive.BL.setVelocity(0);
@@ -74,12 +78,12 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
                         mDrive.FL.setVelocity(0);
                         break;
                     case 2:
-                        linearMovement(16.25,1.5, 0.0004, 0.00007, 0.000068);
+                        linearMovement(50,1.5, 0.0004, 0.00007, 0.000068);
                         sleep(595);
-                        mDrive.FL.setVelocity(100); //left strafe
-                        mDrive.BL.setVelocity(-100); //left strafe
-                        mDrive.FR.setVelocity(100); //left strafe
-                        mDrive.BR.setVelocity(-100); //left strafe
+                       /* mDrive.FL.setVelocity(1000); //left strafe
+                        mDrive.BL.setVelocity(-1000); //left strafe
+                        mDrive.FR.setVelocity(1000); //left strafe
+                        mDrive.BR.setVelocity(-1000); //left strafe*/
                         sleep(1000);
                         mDrive.BR.setVelocity(0);
                         mDrive.BL.setVelocity(0);
@@ -89,10 +93,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
                     default:
                         linearMovement(16.5,1.5, 0.0004, 0.00007, 0.000068);
                         sleep(595);
-                        mDrive.FL.setVelocity(100); //left strafe
-                        mDrive.BL.setVelocity(-100); //left strafe
-                        mDrive.FR.setVelocity(100); //left strafe
-                        mDrive.BR.setVelocity(-100); //left strafe
+                        mDrive.FL.setVelocity(1000); //left strafe
+                        mDrive.BL.setVelocity(-1000); //left strafe
+                        mDrive.FR.setVelocity(1000); //left strafe
+                        mDrive.BR.setVelocity(-1000); //left strafe
                         sleep(1000);
                         mDrive.BR.setVelocity(0);
                         mDrive.BL.setVelocity(0);
@@ -106,7 +110,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
         public void linearMovement(double distance, double tf, double kP, double kI, double kD) {
             mDrive.resetEncoders();
-            double conversionIndex = 1104.04; // ticks per inch
+            double conversionIndex = 500.04; // ticks per inch
             double timeFrame = tf; //distance * distanceTimeIndex;
             double errorMargin = 5;
             double powerFloor = 0;
