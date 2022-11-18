@@ -35,10 +35,10 @@ public class hardwareMap {
       //  Filler1 = hardwareMap.get(DcMotorEx.class, "F1");
       //  Filler2 = hardwareMap.get(DcMotorEx.class, "F2");
 
-        BR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        BL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        FR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        FL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        BR.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        BL.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        FR.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        FL.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
 
        /* Laft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         Duckie.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -100,10 +100,10 @@ public class hardwareMap {
     }
 
     public void freeze(){
-        FL.setPower(0);
+       /* FL.setPower(0);
         FR.setPower(0);
         BL.setPower(0);
-        BR.setPower(0);
+        BR.setPower(0);*/
         //Laft.setPower(0);
        // Duckie.setPower(0);
     }

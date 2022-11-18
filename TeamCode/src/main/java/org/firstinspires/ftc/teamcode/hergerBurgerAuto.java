@@ -33,10 +33,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
         @Override
         public void runOpMode() throws InterruptedException {
-            mDrive.BR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            mDrive.FR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            mDrive.FL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            mDrive.BL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            mDrive.BR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+            mDrive.FR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+            mDrive.FL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+            mDrive.BL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
             BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
 
             parameters.mode = BNO055IMU.SensorMode.IMU;
