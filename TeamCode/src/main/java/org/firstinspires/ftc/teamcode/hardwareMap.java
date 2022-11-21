@@ -18,16 +18,26 @@ public class hardwareMap {
     public DcMotor Laft; //port 0 ExpansionHub 40:1
     public CRServo InOut; //port _
     public DcMotor Duckie; //port _
+    public DcMotor.RunMode RUN_USING_ENCODER;
 
     public BNO055IMU imu;
 
     public void init(HardwareMap h) {
         hardwareMap = h;
-        BR = hardwareMap.get(DcMotorEx.class, "rightBack");
-        FR = hardwareMap.get(DcMotorEx.class, "rightFront");
-        FL = hardwareMap.get(DcMotorEx.class, "leftFront");
-        BL = hardwareMap.get(DcMotorEx.class, "leftBack");
+        BR = (DcMotorEx)hardwareMap.get( DcMotor.class, "rightBack");
+        FR = (DcMotorEx)hardwareMap.get(DcMotor.class, "rightFront");
+        FL = (DcMotorEx)hardwareMap.get(DcMotor.class, "leftFront");
+        BL = (DcMotorEx)hardwareMap.get(DcMotor.class, "leftBack");
 
+        BR.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        BL.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        FR.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        FL.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+
+        BR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        FL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        FR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        BL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
       //  Laft = hardwareMap.get(DcMotor.class, "L1"); //lift motor imo
       //  InOut = hardwareMap.get(CRServo.class, "IO1"); //intake\outtake motor
@@ -35,10 +45,7 @@ public class hardwareMap {
       //  Filler1 = hardwareMap.get(DcMotorEx.class, "F1");
       //  Filler2 = hardwareMap.get(DcMotorEx.class, "F2");
 
-        BR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        BL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        FR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        FL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
 
        /* Laft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         Duckie.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -100,10 +107,10 @@ public class hardwareMap {
     }
 
     public void freeze(){
-        FL.setPower(0);
+       /* FL.setPower(0);
         FR.setPower(0);
         BL.setPower(0);
-        BR.setPower(0);
+        BR.setPower(0);*/
         //Laft.setPower(0);
        // Duckie.setPower(0);
     }
