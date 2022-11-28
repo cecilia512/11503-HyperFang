@@ -66,7 +66,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
                 switch (level) {
                     case 1:
                         linearMovement(17.25,1.5, 0.0004, 0.00007, 0.000068);
-                        sleep(250);
+                        sleep(595);
                         mDrive.FL.setVelocity(1000); //left strafe
                         mDrive.BL.setVelocity(-1000); //left strafe
                         mDrive.FR.setVelocity(1000); //left strafe
@@ -91,7 +91,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
                         mDrive.FL.setVelocity(0);
                         break;
                     default:
-                        linearMovement(16.5,1.5, 0.0004, 0.00007, 0.000068);
+                        linearMovement(17.5,1.5, 0.0004, 0.00007, 0.000068);
                         sleep(595);
                         mDrive.FL.setVelocity(1000); //left strafe
                         mDrive.BL.setVelocity(-1000); //left strafe
