@@ -179,6 +179,77 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
             }
             mDrive.freeze();
         }
+        public void strafeMovement(double distance,String direction , double tf, double kP, double kI, double kD) {
+            mDrive.resetEncoders();
+            double conversionIndex = 500.04; // ticks per inch
+            double timeFrame = tf; //distance * distanceTimeIndex;
+            double errorMargin = 5;
+            double powerFloor = 0;
+            double powerCeiling = 1;
+
+            ElapsedTime clock = new ElapsedTime();
+            clock.reset();
+            mDrive.resetEncoders();
+
+            double targetTick = -1 * distance * conversionIndex;
+            telemetry.addData("target tick", targetTick);
+            telemetry.update();
+
+
+            double error = targetTick;
+            double errorPrev = error;
+            double time = clock.seconds();
+            double timePrev = time;
+
+            double  p, d, output;
+            double i = 0;
+
+            while (clock.seconds() < timeFrame && Math.abs(error) > errorMargin && opModeIsActive()) {
+                errorPrev = error;
+                timePrev = time;
+
+                double tempAvg = targetTick > 0 ? mDrive.getEncoderAvg() : -mDrive.getEncoderAvg();
+
+                error = targetTick - tempAvg;
+                time = clock.seconds();
+
+                p = Math.abs(error) / 33.0 * kP;
+                i += (time - timePrev) * Math.abs(error) / 33.0 * kI;
+                d = Math.abs((error - errorPrev) / (time - timePrev) / 33.0 * kD);
+
+                output = p + i - d;
+                telemetry.addData("output", output);
+                output = Math.max(output, powerFloor);
+                output = Math.min(output, powerCeiling);
+                if (error < 0) output *= -1;
+
+                double currentAngle = imu.getAngularOrientation().firstAngle;
+                double raw = globalAngle - currentAngle;
+                if (raw > 180)
+                    raw -= 360;
+                if (raw < -180)
+                    raw += 360;
+                double fudgeFactor = 1.0 - raw / 40.0;
+
+                if (distance > 0)
+                {
+                    mDrive.FL.setPower(output);
+                    mDrive.FR.setPower(-output);
+                    mDrive.BL.setPower(output);
+                    mDrive.BR.setPower(-output); //-.35
+
+                }
+                else
+                {
+                    mDrive.FL.setPower(-output);
+                    mDrive.FR.setPower(output);
+                    mDrive.BL.setPower(-output);
+                    mDrive.BR.setPower(output);
+
+                }
+            }
+            mDrive.freeze();
+        }
 
         public void turnDegree(double degree, double timeframe) {
             telemetry.addLine("made it");
