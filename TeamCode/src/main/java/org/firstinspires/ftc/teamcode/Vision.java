@@ -38,12 +38,12 @@ public class Vision {
     private final int CYAN_RED_HIGH = 50;
     private final int CYAN_BlUE_LOW = 120; //no need for cyan blue high, because the high is 255
     private final int CYAN_BlUE_HIGH = 146;
-    private final int CYAN_GREEN_LOW = 90; //same reasoning
+    private final int CYAN_GREEN_LOW = 80; //same reasoning
     private final int CYAN_GREEN_HIGH = 110; //same reasoning
 
-    private final int MAGENTA_RED_LOW = 128;
+    private final int MAGENTA_RED_LOW = 113;
     private final int MAGENTA_RED_HIGH = 150;
-    private final int MAGENTA_BLUE_LOW = 65; //i am assuming the same holds for magenta
+    private final int MAGENTA_BLUE_LOW = 55; //i am assuming the same holds for magenta
     private final int MAGENTA_BLUE_HIGH = 85; //i am assuming the same holds for magenta
     private final int MAGENTA_GREEN_LOW = 20;
     private final int MAGENTA_GREEN_HIGH = 46;
@@ -100,7 +100,7 @@ public class Vision {
             yherny = bitmap.getHeight() - monkus;
             crongemac = 1;
             xherny = bitmap.getWidth() - crongemac;
-            while (crongemac < 465) {
+            while (crongemac < 550) {
                 xherny = bitmap.getWidth() - crongemac;
                 if (isMagenta(bitmap.getPixel(xherny,yherny))){
                     mCount ++;

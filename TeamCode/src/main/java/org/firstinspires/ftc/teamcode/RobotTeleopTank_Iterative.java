@@ -59,7 +59,8 @@ public class RobotTeleopTank_Iterative extends OpMode{
     public DcMotor  rightFront;
     public DcMotor  rightBack;
     public DcMotor  leftBack;
-    public DcMotor  tempArm;
+    public DcMotor  liftOne;
+    public DcMotor liftTwo;
     //public CRServo  vexArmL;
     //public CRServo  vexArmR;
     public CRServo  vexClaw;
@@ -82,7 +83,8 @@ public class RobotTeleopTank_Iterative extends OpMode{
         leftBack    = hardwareMap.get(DcMotor.class, "leftBack");
         //vexArmL     = hardwareMap.crservo.get( "vexArmL");
         //vexArmR     = hardwareMap.crservo.get("vexArmR");
-        tempArm     = hardwareMap.get(DcMotor.class, "tempArm");
+        liftOne     = hardwareMap.get(DcMotor.class, "liftOne");
+        liftTwo     = hardwareMap.get(DcMotor.class, "liftTwo");
         vexClaw     = hardwareMap.crservo.get("vexClaw");
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
@@ -213,7 +215,8 @@ public class RobotTeleopTank_Iterative extends OpMode{
                 liftPower = 0;
                 telemetry.addData("Liftpower: ", "%.2f", liftPower);
             }
-            tempArm.setPower(liftPower);
+            liftOne.setPower(liftPower);
+            liftTwo.setPower(-liftPower);
         }
 
 
