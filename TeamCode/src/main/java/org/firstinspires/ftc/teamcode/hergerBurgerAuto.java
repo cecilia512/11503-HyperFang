@@ -65,7 +65,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
             if (!isStopRequested()){
                 switch (level) {
                     case 1:
-                        linearMovement(17.25,1.5, 0.0004, 0.00007, 0.000068);
+                        linearMovement(20.25,1.5, 0.0004, 0.00007, 0.000068);
                         sleep(595);
                         mDrive.FL.setVelocity(1000); //left strafe
                         mDrive.BL.setVelocity(-1000); //left strafe
