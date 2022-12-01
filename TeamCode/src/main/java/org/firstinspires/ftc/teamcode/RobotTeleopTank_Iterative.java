@@ -34,6 +34,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
@@ -59,8 +60,8 @@ public class RobotTeleopTank_Iterative extends OpMode{
     public DcMotor  rightFront;
     public DcMotor  rightBack;
     public DcMotor  leftBack;
-    public DcMotor  liftOne;
-    public DcMotor  liftTwo;
+    public DcMotorEx  liftOne;
+    public DcMotorEx liftTwo;
     public CRServo  vexClaw;
 
     double clawOffset = 0;
@@ -81,8 +82,8 @@ public class RobotTeleopTank_Iterative extends OpMode{
         leftBack    = hardwareMap.get(DcMotor.class, "leftBack");
         //vexArmL     = hardwareMap.crservo.get( "vexArmL");
         //vexArmR     = hardwareMap.crservo.get("vexArmR");
-        liftOne     = hardwareMap.get(DcMotor.class, "liftOne");
-        liftTwo     = hardwareMap.get(DcMotor.class, "liftTwo");
+        liftOne     = (DcMotorEx) hardwareMap.get(DcMotor.class, "liftOne");
+        liftTwo     = (DcMotorEx) hardwareMap.get(DcMotor.class, "liftTwo");
         vexClaw     = hardwareMap.crservo.get("vexClaw");
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
@@ -92,6 +93,11 @@ public class RobotTeleopTank_Iterative extends OpMode{
         rightFront.setDirection(DcMotor.Direction.FORWARD);
         leftBack.setDirection(DcMotor.Direction.REVERSE);
         rightBack.setDirection(DcMotor.Direction.FORWARD);
+
+        liftOne.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        liftOne.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        liftTwo.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        liftTwo.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // If there are encoders connected, switch to RUN_USING_ENCODER mode for greater accuracy
         // leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -196,32 +202,28 @@ public class RobotTeleopTank_Iterative extends OpMode{
         }*/
 
 
-
+        double liftPower = 0;
+        double yVal = gamepad2.right_stick_y;
+        telemetry.addData("Liftpower: ", "%.2f", liftPower);
         telemetry.addData("y val : ", gamepad2.right_stick_y);
-        if(gamepad2.right_stick_y != 0){
-            double yVal = gamepad2.right_stick_y;
-            double liftPower;
+
+        if (gamepad2.right_stick_y > .3 || gamepad2.right_stick_y < -.3){
+
             if ( gamepad2.b ) liftPower = 0;
-            if (yVal < -.3 ){
-                liftPower = gamepad2.right_stick_y * 0.65; // * tog2;
-                telemetry.addData("Liftpower: ", "%.2f", liftPower);
+            else if (yVal < -.3 || yVal > .3){
+                liftPower = gamepad2.right_stick_y * 1000; // * tog2;
             }
-            else if (yVal > .3) {
-                liftPower = gamepad2.right_stick_y * 0.65; // * tog2;
-                telemetry.addData("Liftpower: ", "%.2f", liftPower);
-            }
-            else{
-                liftPower = 0;
-                telemetry.addData("Liftpower: ", "%.2f", liftPower);
-            }
-            if (gamepad2.right_stick_y < .3 && gamepad2.right_stick_y > -.3){
-                liftPower = 0;
-            }
+
             if (!gamepad2.b) {
-                liftOne.setPower(liftPower);
-                liftTwo.setPower(-liftPower);
+                liftOne.setVelocity(liftPower);
+                liftTwo.setVelocity(-liftPower);
             }
-            if ( gamepad2.b ) liftPower = 0;
+
+        }
+        else {
+            liftPower = 0;
+            liftOne.setVelocity(liftPower);
+            liftTwo.setVelocity(-liftPower);
         }
 
 
