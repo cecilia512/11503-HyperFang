@@ -60,9 +60,7 @@ public class RobotTeleopTank_Iterative extends OpMode{
     public DcMotor  rightBack;
     public DcMotor  leftBack;
     public DcMotor  liftOne;
-    public DcMotor liftTwo;
-    //public CRServo  vexArmL;
-    //public CRServo  vexArmR;
+    public DcMotor  liftTwo;
     public CRServo  vexClaw;
 
     double clawOffset = 0;
@@ -203,7 +201,7 @@ public class RobotTeleopTank_Iterative extends OpMode{
         if(gamepad2.right_stick_y != 0){
             double yVal = gamepad2.right_stick_y;
             double liftPower;
-
+            if ( gamepad2.b ) liftPower = 0;
             if (yVal < -.3 ){
                 liftPower = gamepad2.right_stick_y * 0.65; // * tog2;
                 telemetry.addData("Liftpower: ", "%.2f", liftPower);
@@ -219,8 +217,11 @@ public class RobotTeleopTank_Iterative extends OpMode{
             if (gamepad2.right_stick_y < .3 && gamepad2.right_stick_y > -.3){
                 liftPower = 0;
             }
-            liftOne.setPower(liftPower);
-            liftTwo.setPower(-liftPower);
+            if (!gamepad2.b) {
+                liftOne.setPower(liftPower);
+                liftTwo.setPower(-liftPower);
+            }
+            if ( gamepad2.b ) liftPower = 0;
         }
 
 

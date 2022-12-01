@@ -65,48 +65,51 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
             if (!isStopRequested()){
                 switch (level) {
                     case 1:
-                        linearMovement(20.25,1.5, 0.0004, 0.00007, 0.000068);
+                        linearMovement(27,1.5, 0.0004, 0.00005, 0.000068);
                         sleep(595);
-                        mDrive.FL.setVelocity(1000); //left strafe
-                        mDrive.BL.setVelocity(-1000); //left strafe
-                        mDrive.FR.setVelocity(1000); //left strafe
-                        mDrive.BR.setVelocity(-1000); //left strafe
+                        strafeMovement(1005, "LEFT");
                         sleep(1000);
-                        mDrive.BR.setVelocity(0);
-                        mDrive.BL.setVelocity(0);
-                        mDrive.FR.setVelocity(0);
-                        mDrive.FL.setVelocity(0);
+                        restBud();
                         break;
                     case 2:
-                        linearMovement(50,1.5, 0.0004, 0.00007, 0.000068);
+                        linearMovement(27.5,1.5, 0.0004, 0.00007, 0.000068);
                         sleep(595);
-                       /* mDrive.FL.setVelocity(1000); //left strafe
-                        mDrive.BL.setVelocity(-1000); //left strafe
-                        mDrive.FR.setVelocity(1000); //left strafe
-                        mDrive.BR.setVelocity(-1000); //left strafe*/
                         sleep(1000);
-                        mDrive.BR.setVelocity(0);
-                        mDrive.BL.setVelocity(0);
-                        mDrive.FR.setVelocity(0);
-                        mDrive.FL.setVelocity(0);
+                        restBud();
                         break;
                     default:
-                        linearMovement(17.5,1.5, 0.0004, 0.00007, 0.000068);
+                        linearMovement(27.5,1.5, 0.0004, 0.00007, 0.000068);
                         sleep(595);
-                        mDrive.FL.setVelocity(1000); //left strafe
-                        mDrive.BL.setVelocity(-1000); //left strafe
-                        mDrive.FR.setVelocity(1000); //left strafe
-                        mDrive.BR.setVelocity(-1000); //left strafe
+                        strafeMovement(1003, "RIGHT");
                         sleep(1000);
-                        mDrive.BR.setVelocity(0);
-                        mDrive.BL.setVelocity(0);
-                        mDrive.FR.setVelocity(0);
-                        mDrive.FL.setVelocity(0);
+                        restBud();
                         break;
                 }
             }
         }
 
+
+        public void restBud(){
+            mDrive.BR.setVelocity(0);
+            mDrive.BL.setVelocity(0);
+            mDrive.FR.setVelocity(0);
+            mDrive.FL.setVelocity(0);
+        }
+        public void strafeMovement(double rate, String direction){
+            if (direction.equals("RIGHT")) {
+                mDrive.FL.setVelocity(-rate); //right strafe
+                mDrive.BL.setVelocity(rate);
+                mDrive.FR.setVelocity(-rate);
+                mDrive.BR.setVelocity(rate);
+            }
+
+            if (direction.equals("LEFT")) {
+                mDrive.FL.setVelocity(rate); //left strafe
+                mDrive.BL.setVelocity(-rate);
+                mDrive.FR.setVelocity(rate);
+                mDrive.BR.setVelocity(-rate);
+            }
+        }
 
         public void linearMovement(double distance, double tf, double kP, double kI, double kD) {
             mDrive.resetEncoders();
