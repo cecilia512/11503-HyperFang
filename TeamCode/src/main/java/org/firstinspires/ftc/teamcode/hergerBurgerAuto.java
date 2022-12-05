@@ -65,22 +65,22 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
             if (!isStopRequested()){
                 switch (level) {
                     case 1:
-                        linearMovement(27,1.5, 0.0004, 0.00005, 0.000068);
+                        linearMovement(25.5,1.5, 0.0004, 0.00005, 0.000068);
                         sleep(595);
-                        strafeMovement(1005, "LEFT");
+                        strafeMovement(1025, "LEFT");
                         sleep(1000);
                         restBud();
                         break;
                     case 2:
-                        linearMovement(27.5,1.5, 0.0004, 0.00007, 0.000068);
+                        linearMovement(25.5,1.5, 0.0004, 0.00007, 0.000068);
                         sleep(595);
                         sleep(1000);
                         restBud();
                         break;
                     default:
-                        linearMovement(27.5,1.5, 0.0004, 0.00007, 0.000068);
+                        linearMovement(25.5,1.5, 0.0004, 0.00007, 0.000068);
                         sleep(595);
-                        strafeMovement(1003, "RIGHT");
+                        strafeMovement(1025, "RIGHT");
                         sleep(1000);
                         restBud();
                         break;

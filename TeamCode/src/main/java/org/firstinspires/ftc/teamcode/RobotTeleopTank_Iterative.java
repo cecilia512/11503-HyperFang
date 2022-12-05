@@ -211,19 +211,19 @@ public class RobotTeleopTank_Iterative extends OpMode{
 
             if ( gamepad2.b ) liftPower = 0;
             else if (yVal < -.3 || yVal > .3){
-                liftPower = gamepad2.right_stick_y * 1000; // * tog2;
+                liftPower = gamepad2.right_stick_y * 2000; // * tog2;
             }
 
             if (!gamepad2.b) {
-                liftOne.setVelocity(liftPower);
-                liftTwo.setVelocity(-liftPower);
+                liftOne.setVelocity(-liftPower);
+                liftTwo.setVelocity(liftPower);
             }
 
         }
         else {
             liftPower = 0;
-            liftOne.setVelocity(liftPower);
-            liftTwo.setVelocity(-liftPower);
+            liftOne.setVelocity(-liftPower);
+            liftTwo.setVelocity(liftPower);
         }
 
 
