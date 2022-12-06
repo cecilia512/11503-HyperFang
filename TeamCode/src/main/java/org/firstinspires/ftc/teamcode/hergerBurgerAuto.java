@@ -90,12 +90,14 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 
         public void restBud(){
+            mDrive.resetEncoders();
             mDrive.BR.setVelocity(0);
             mDrive.BL.setVelocity(0);
             mDrive.FR.setVelocity(0);
             mDrive.FL.setVelocity(0);
         }
         public void strafeMovement(double rate, String direction){
+            mDrive.resetEncoders();
             if (direction.equals("RIGHT")) {
                 mDrive.FL.setVelocity(-rate); //right strafe
                 mDrive.BL.setVelocity(rate);
