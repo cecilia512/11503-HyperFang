@@ -80,7 +80,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
                     default:
                         linearMovement(25.5,1.5, 0.0004, 0.00007, 0.000068);
                         sleep(595);
-                        strafeMovement(1025, "RIGHT");
+                        //larger on right idk why but it helps
+                        strafeMovement(1125, "RIGHT");
                         sleep(1000);
                         restBud();
                         break;
