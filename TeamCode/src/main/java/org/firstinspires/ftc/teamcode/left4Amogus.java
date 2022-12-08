@@ -4,19 +4,22 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 
-@Autonomous(name="fortniteRight", group="auto")
-public class fortniteAutoRight extends LinearOpMode {
+@Autonomous(name="left4Amogus", group="auto")
+public class left4Amogus extends LinearOpMode {
 
     BNO055IMU imu;
     double globalAngle;
     Orientation lastAngles = new Orientation();
 
     hardwareMap mDrive = new hardwareMap();
+
 
     public final double WHEEL_DIAMETER = 4.0; //Wheel diameter in inches
     public final int MOTOR_GEAR_TEETH = 1; //# of teeth on the motor gear
@@ -30,6 +33,10 @@ public class fortniteAutoRight extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
+          /*  mDrive.BR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+            mDrive.FR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+            mDrive.FL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+            mDrive.BL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);*/
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
 
         parameters.mode = BNO055IMU.SensorMode.IMU;
@@ -44,36 +51,73 @@ public class fortniteAutoRight extends LinearOpMode {
 
         Vision vision = new Vision(this, 'r');
 
+        telemetry.addData("MODE: ",mDrive.FR.getMode());
+        telemetry.update();
+
         while (!isStarted() ) {
             level = vision.levelIdent('r');
             telemetry.addData("",level);
             telemetry.update();
+
         }
 
         waitForStart();
         if (!isStopRequested()){
             switch (level) {
+                case 1:
+                    linearMovement(30,1.5, 0.0004, 0.00005, 0.000068);
+                    sleep(595);
+                    turnDegree(90,20);
+                    sleep(1000);
+                  //  linearMovement(2, );
+                    restBud();
+                    break;
+                case 2:
+                    linearMovement(25.5,1.5, 0.0004, 0.00007, 0.000068);
+                    sleep(595);
+                    sleep(1000);
+                    restBud();
+                    break;
                 default:
-                    mDrive.FL.setPower(-0.5); //rightht strafe
-                    mDrive.BL.setPower(0.5); //lrihgt strafe
-                    mDrive.FR.setPower(-0.5); //right strafe
-                    mDrive.BR.setPower(0.5); //rgith strafe
-                    sleep(1750);
-                    linearMovement(-17, 1.5, 0.0004, 0.00007, 0.000068);
-                    sleep(250);
-                    mDrive.BR.setPower(0);
-                    mDrive.BL.setPower(0);
-                    mDrive.FR.setPower(0);
-                    mDrive.FL.setPower(0);
+                    linearMovement(25.5,1.5, 0.0004, 0.00007, 0.000068);
+                    sleep(595);
+                    //larger on right idk why but it helps
+                    strafeMovement(1125, "RIGHT");
+                    sleep(1000);
+                    restBud();
                     break;
             }
         }
     }
 
 
+    public void restBud(){
+        mDrive.resetEncoders();
+        mDrive.BR.setVelocity(0);
+        mDrive.BL.setVelocity(0);
+        mDrive.FR.setVelocity(0);
+        mDrive.FL.setVelocity(0);
+    }
+    public void strafeMovement(double rate, String direction){
+        mDrive.resetEncoders();
+        if (direction.equals("RIGHT")) {
+            mDrive.FL.setVelocity(-rate); //right strafe
+            mDrive.BL.setVelocity(rate);
+            mDrive.FR.setVelocity(-rate);
+            mDrive.BR.setVelocity(rate);
+        }
+
+        if (direction.equals("LEFT")) {
+            mDrive.FL.setVelocity(rate); //left strafe
+            mDrive.BL.setVelocity(-rate);
+            mDrive.FR.setVelocity(rate);
+            mDrive.BR.setVelocity(-rate);
+        }
+    }
+
     public void linearMovement(double distance, double tf, double kP, double kI, double kD) {
         mDrive.resetEncoders();
-        double conversionIndex = 1104.04; // ticks per inch
+        double conversionIndex = 500.04; // ticks per inch
         double timeFrame = tf; //distance * distanceTimeIndex;
         double errorMargin = 5;
         double powerFloor = 0;
@@ -133,15 +177,86 @@ public class fortniteAutoRight extends LinearOpMode {
             }
             else
             {
-                mDrive.FL.setPower(output);
-                mDrive.FR.setPower(-output);
-                mDrive.BL.setPower(output);
-                mDrive.BR.setPower(-output);
+                mDrive.FL.setPower(-output);
+                mDrive.FR.setPower(output);
+                mDrive.BL.setPower(-output);
+                mDrive.BR.setPower(output);
 
             }
         }
         mDrive.freeze();
     }
+   /* public void strafeMovement(double distance,String direction , double tf, double kP, double kI, double kD) {
+        mDrive.resetEncoders();
+        double conversionIndex = 500.04; // ticks per inch
+        double timeFrame = tf; //distance * distanceTimeIndex;
+        double errorMargin = 5;
+        double powerFloor = 0;
+        double powerCeiling = 1;
+
+        ElapsedTime clock = new ElapsedTime();
+        clock.reset();
+        mDrive.resetEncoders();
+
+        double targetTick = -1 * distance * conversionIndex;
+        telemetry.addData("target tick", targetTick);
+        telemetry.update();
+
+
+        double error = targetTick;
+        double errorPrev = error;
+        double time = clock.seconds();
+        double timePrev = time;
+
+        double  p, d, output;
+        double i = 0;
+
+        while (clock.seconds() < timeFrame && Math.abs(error) > errorMargin && opModeIsActive()) {
+            errorPrev = error;
+            timePrev = time;
+
+            double tempAvg = targetTick > 0 ? mDrive.getEncoderAvg() : -mDrive.getEncoderAvg();
+
+            error = targetTick - tempAvg;
+            time = clock.seconds();
+
+            p = Math.abs(error) / 33.0 * kP;
+            i += (time - timePrev) * Math.abs(error) / 33.0 * kI;
+            d = Math.abs((error - errorPrev) / (time - timePrev) / 33.0 * kD);
+
+            output = p + i - d;
+            telemetry.addData("output", output);
+            output = Math.max(output, powerFloor);
+            output = Math.min(output, powerCeiling);
+            if (error < 0) output *= -1;
+
+            double currentAngle = imu.getAngularOrientation().firstAngle;
+            double raw = globalAngle - currentAngle;
+            if (raw > 180)
+                raw -= 360;
+            if (raw < -180)
+                raw += 360;
+            double fudgeFactor = 1.0 - raw / 40.0;
+
+            if (distance > 0)
+            {
+                mDrive.FL.setPower(output);
+                mDrive.FR.setPower(-output);
+                mDrive.BL.setPower(output);
+                mDrive.BR.setPower(-output); //-.35
+
+            }
+            else
+            {
+                mDrive.FL.setPower(-output);
+                mDrive.FR.setPower(output);
+                mDrive.BL.setPower(-output);
+                mDrive.BR.setPower(output);
+
+            }
+        }
+        mDrive.freeze();
+    }*/
 
     public void turnDegree(double degree, double timeframe) {
         telemetry.addLine("made it");

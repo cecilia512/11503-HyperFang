@@ -65,14 +65,14 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
             if (!isStopRequested()){
                 switch (level) {
                     case 1:
-                        linearMovement(25.5,1.5, 0.0004, 0.00005, 0.000068);
+                        linearMovement(5,1.5, 0.0004, 0.00005, 0.000068);
                         sleep(595);
-                        strafeMovement(1025, "LEFT");
+                        strafeMovement(1225, "LEFT");
                         sleep(1000);
                         restBud();
                         break;
                     case 2:
-                        linearMovement(25.5,1.5, 0.0004, 0.00007, 0.000068);
+                        linearMovement(30,1.5, 0.0004, 0.00007, 0.000068);
                         sleep(595);
                         sleep(1000);
                         restBud();
@@ -81,7 +81,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
                         linearMovement(25.5,1.5, 0.0004, 0.00007, 0.000068);
                         sleep(595);
                         //larger on right idk why but it helps
-                        strafeMovement(1125, "RIGHT");
+                        strafeMovement(1225, "RIGHT");
                         sleep(1000);
                         restBud();
                         break;
@@ -185,7 +185,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
             }
             mDrive.freeze();
         }
-        public void strafeMovement(double distance,String direction , double tf, double kP, double kI, double kD) {
+        /*public void strafeMovement(double distance,String direction , double tf, double kP, double kI, double kD) {
             mDrive.resetEncoders();
             double conversionIndex = 500.04; // ticks per inch
             double timeFrame = tf; //distance * distanceTimeIndex;
@@ -255,7 +255,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
                 }
             }
             mDrive.freeze();
-        }
+       } */
 
         public void turnDegree(double degree, double timeframe) {
             telemetry.addLine("made it");

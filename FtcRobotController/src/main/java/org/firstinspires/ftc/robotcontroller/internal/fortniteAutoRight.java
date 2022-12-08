@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.robotcontroller.internal;
 
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
@@ -8,15 +8,15 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
-
-@Autonomous(name="fortniteLeft", group="auto")
-public class fortniteAutoLeft extends LinearOpMode {
+/*
+@Autonomous(name="fortniteRight", group="auto")
+public class fortniteAutoRight extends LinearOpMode {
 
     BNO055IMU imu;
     double globalAngle;
     Orientation lastAngles = new Orientation();
 
-    hardwareMap mDrive = new hardwareMap();
+    //hardwareMap mDrive = new hardwareMap();
 
     public final double WHEEL_DIAMETER = 4.0; //Wheel diameter in inches
     public final int MOTOR_GEAR_TEETH = 1; //# of teeth on the motor gear
@@ -54,10 +54,10 @@ public class fortniteAutoLeft extends LinearOpMode {
         if (!isStopRequested()){
             switch (level) {
                 default:
-                    mDrive.FL.setPower(0.5); //left strafe
-                    mDrive.BL.setPower(-0.5); //left strafe
-                    mDrive.FR.setPower(0.5); //left strafe
-                    mDrive.BR.setPower(-0.5); //left strafe
+                    mDrive.FL.setPower(-0.5); //rightht strafe
+                    mDrive.BL.setPower(0.5); //lrihgt strafe
+                    mDrive.FR.setPower(-0.5); //right strafe
+                    mDrive.BR.setPower(0.5); //rgith strafe
                     sleep(1750);
                     linearMovement(-17, 1.5, 0.0004, 0.00007, 0.000068);
                     sleep(250);
@@ -307,4 +307,4 @@ public class fortniteAutoLeft extends LinearOpMode {
         telemetry.addData("movement", " done.");
         telemetry.update();
     }
-}
+}*/
