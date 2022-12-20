@@ -84,11 +84,17 @@ public class right4Amogus extends LinearOpMode {
                     restBud();
                     break;
                 default:
-                    linearMovement(25.5,1.5, 0.0004, 0.00007, 0.000068);
-                    sleep(595);
+                    linearMovement(38,1.5, 0.0004, 0.00007, 0.000068);//kp 0.0004 kI 0.00007 kD 0.000068
+                    sleep(1500);
                     //larger on right idk why but it helps
-                    strafeMovement(1125, "RIGHT");
+                    strafeMovement(0, "RIGHT");
                     sleep(1000);
+                    turnDegree(-68, .5);//-70
+                    sleep(500);
+                    linearMovement(30,1, 0.0004, 0.00007, 0.000068);
+                    sleep(1000);
+                    linearMovement(-46,1.5, 0.0004, 0.00007, 0.000068);
+                    sleep(1500);
                     restBud();
                     break;
             }
@@ -182,10 +188,10 @@ public class right4Amogus extends LinearOpMode {
             }
             else
             {
-                mDrive.FL.setPower(-output);
-                mDrive.FR.setPower(output);
-                mDrive.BL.setPower(-output);
-                mDrive.BR.setPower(output);
+                mDrive.FL.setPower(output);
+                mDrive.FR.setPower(-output);
+                mDrive.BL.setPower(output);
+                mDrive.BR.setPower(-output);
 
             }
         }
@@ -292,9 +298,9 @@ public class right4Amogus extends LinearOpMode {
         double time = clock.seconds();
         double timePrev = time;
 
-        double kP = 0.01;
-        double kI = 0.007;
-        double kD = 0.002;
+        double kP = 0.0075;
+        double kI = 0.0005;
+        double kD = 0.0005;
 
         double p, d, output;
         double i = 0;
