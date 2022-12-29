@@ -93,7 +93,15 @@ public class right4Amogus extends LinearOpMode {
                     sleep(500);
                     linearMovement(30,1, 0.0004, 0.00007, 0.000068);
                     sleep(1000);
-                    linearMovement(-46,1.5, 0.0004, 0.00007, 0.000068);
+                    linearMovement(-35,1.5, 0.0004, 0.00007, 0.000068);
+                    sleep(1500);
+                    strafeMovement(1000, "RIGHT");
+                    sleep(800);
+                    strafeMovement(-1000, "RIGHT");
+                    sleep(1100);
+                    linearMovement(35,1.5, 0.0004, 0.00007, 0.000068);
+                    sleep(1500);
+                    linearMovement(-35,1.5, 0.0004, 0.00007, 0.000068);
                     sleep(1500);
                     restBud();
                     break;
