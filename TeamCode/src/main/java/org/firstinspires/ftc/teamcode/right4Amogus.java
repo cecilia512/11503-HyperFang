@@ -8,7 +8,14 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+import org.openftc.apriltag.AprilTagDetection;
+import org.openftc.easyopencv.OpenCvCamera;
+import org.openftc.easyopencv.OpenCvCameraFactory;
+import org.openftc.easyopencv.OpenCvCameraRotation;
+
+import java.util.ArrayList;
 
 
 @Autonomous(name="right4Amogus", group="auto")
@@ -21,6 +28,10 @@ public class right4Amogus extends LinearOpMode {
     hardwareMap mDrive = new hardwareMap();
 
 
+    OpenCvCamera camera;
+    AprilTagDetectionPipeline aprilTagDetectionPipeline;
+
+    static final double FEET_PER_METER = 3.28084;
     public final double WHEEL_DIAMETER = 4.0; //Wheel diameter in inches
     public final int MOTOR_GEAR_TEETH = 1; //# of teeth on the motor gear
     public final int WHEEL_GEAR_TEETH = 15; //# of teeth on the wheel gear
@@ -30,6 +41,21 @@ public class right4Amogus extends LinearOpMode {
 
 
     int level;
+
+    // You will need to do your own calibration for other configurations!
+    double fx = 578.272;
+    double fy = 578.272;
+    double cx = 402.145;
+    double cy = 221.506;
+
+    // UNITS ARE METERS
+    double tagsize = 0.166;
+
+    // Tag ID 11, 5, 3 from the 36h11 family (11503 yoyoyoyoyo)
+    int left = 11;
+    int middle = 5;
+    int right = 3;
+    AprilTagDetection tagOfInterest = null;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -49,62 +75,160 @@ public class right4Amogus extends LinearOpMode {
         mDrive.init(hardwareMap);
         imu.initialize(parameters);
 
-        Vision vision = new Vision(this, 'r');
+        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam"), cameraMonitorViewId);
+        aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagsize, fx, fy, cx, cy);
+
+        camera.setPipeline(aprilTagDetectionPipeline);
+        camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
+        {
+            @Override
+            public void onOpened()
+            {
+                camera.startStreaming(800,448, OpenCvCameraRotation.UPRIGHT);
+            }
+
+            @Override
+            public void onError(int errorCode)
+            {
+
+            }
+        });
+
+        while (!isStarted() && !isStopRequested())
+        {
+            ArrayList<AprilTagDetection> currentDetections = aprilTagDetectionPipeline.getLatestDetections();
+
+            if(currentDetections.size() != 0)
+            {
+                boolean tagFound = false;
+
+                for(AprilTagDetection tag : currentDetections)
+                {
+                    if(tag.id == left || tag.id == middle || tag.id == right)
+                    {
+                        tagOfInterest = tag;
+                        tagFound = true;
+                        break;
+                    }
+                }
+
+                if(tagFound)
+                {
+                    telemetry.addLine("Tag of interest is in sight!\n\nLocation data:");
+                    tagToTelemetry(tagOfInterest);
+                }
+                else
+                {
+                    telemetry.addLine("Don't see tag of interest :(");
+
+                    if(tagOfInterest == null)
+                    {
+                        telemetry.addLine("(The tag has never been seen)");
+                    }
+                    else
+                    {
+                        telemetry.addLine("\nBut we HAVE seen the tag before; last seen at:");
+                        tagToTelemetry(tagOfInterest);
+                    }
+                }
+
+            }
+            else
+            {
+                telemetry.addLine("Don't see tag of interest :(");
+
+                if(tagOfInterest == null)
+                {
+                    telemetry.addLine("(The tag has never been seen)");
+                }
+                else
+                {
+                    telemetry.addLine("\nBut we HAVE seen the tag before; last seen at:");
+                    tagToTelemetry(tagOfInterest);
+                }
+
+            }
+
+            telemetry.update();
+            sleep(20);
+        }
+
+        /*
+         * The START command just came in: now work off the latest snapshot acquired
+         * during the init loop.
+         */
+
+        /* Update the telemetry */
+        if(tagOfInterest != null)
+        {
+            telemetry.addLine("Tag snapshot:\n");
+            tagToTelemetry(tagOfInterest);
+            telemetry.update();
+        }
+        else
+        {
+            telemetry.addLine("No tag snapshot available, it was never sighted during the init loop :(");
+            telemetry.update();
+        }
+
+        /*Vision vision = new Vision(this, 'r');
 
         telemetry.addData("MODE: ",mDrive.FR.getMode());
         telemetry.update();
-
-        while (!isStarted() ) {
+*/
+     /*   while (!isStarted() ) {
             level = vision.levelIdent('r');
             telemetry.addData("",level);
             telemetry.update();
 
-        }
+        }*/
 
         waitForStart();
         if (!isStopRequested()){
-            switch (level) {
-                case 1:
-                    linearMovement(30,1.5, 0.0004, 0.00005, 0.000068);
-                    sleep(595);
-                    turnDegree(90,20);
-                    sleep(1000);
-                    //  linearMovement(2, );
-                    restBud();
-                    break;
-                case 2:
-                    linearMovement(55,1.5, 0.0003, 0.00007, 0.000068);
-                    sleep(1000);
-                    linearMovement(-7, 1.5, 0.0003, .00007, .000068);
-                    sleep(595);
-                    turnDegree(-90, 2);
-                    sleep(1000);
+            if (tagOfInterest == null || tagOfInterest.id == left) {
+                linearMovement(30, 1.5, 0.0004, 0.00005, 0.000068);
+                sleep(595);
+                turnDegree(90, 20);
+                sleep(1000);
+                //  linearMovement(2, );
+                restBud();
+
+            }
+            else if (tagOfInterest.id == middle) {
+                linearMovement(55, 1.5, 0.0003, 0.00007, 0.000068);
+                sleep(1000);
+                linearMovement(-7, 1.5, 0.0003, .00007, .000068);
+                sleep(595);
+                turnDegree(-90, 2);
+                sleep(1000);
                   /*  linearMovement(2,1.5, 0.0004, 0.00007, 0.000068);
                     linearMovement(-15,1.5, 0.0004, 0.00007, 0.000068);*/
-                    restBud();
-                    break;
-                default:
-                    linearMovement(38,1.5, 0.0004, 0.00007, 0.000068);//kp 0.0004 kI 0.00007 kD 0.000068
-                    sleep(1500);
-                    //larger on right idk why but it helps
-                    strafeMovement(0, "RIGHT");
-                    sleep(1000);
-                    turnDegree(-68, .5);//-70
-                    sleep(500);
-                    linearMovement(30,1, 0.0004, 0.00007, 0.000068);
-                    sleep(1000);
-                    linearMovement(-35,1.5, 0.0004, 0.00007, 0.000068);
-                    sleep(1500);
-                    strafeMovement(1000, "RIGHT");
-                    sleep(800);
-                    strafeMovement(-1000, "RIGHT");
-                    sleep(1100);
-                    linearMovement(35,1.5, 0.0004, 0.00007, 0.000068);
-                    sleep(1500);
-                    linearMovement(-35,1.5, 0.0004, 0.00007, 0.000068);
-                    sleep(1500);
-                    restBud();
-                    break;
+                restBud();
+
+            }
+            else {
+                linearMovement(38, 1.5, 0.0004, 0.00007, 0.000068);//kp 0.0004 kI 0.00007 kD 0.000068
+                sleep(1500);
+                //larger on right idk why but it helps
+                strafeMovement(0, "RIGHT");
+                sleep(1000);
+                turnDegree(-68, .5);//-70
+                sleep(500);
+                linearMovement(30, 1, 0.0004, 0.00007, 0.000068);
+                sleep(1000);
+                linearMovement(-35, 1.5, 0.0004, 0.00007, 0.000068);
+                sleep(1500);
+                strafeMovement(1000, "RIGHT");
+                sleep(800);
+                strafeMovement(-1000, "RIGHT");
+                sleep(1100);
+                linearMovement(35, 1.5, 0.0004, 0.00007, 0.000068);
+                sleep(1500);
+                linearMovement(-35, 1.5, 0.0004, 0.00007, 0.000068);
+                sleep(1500);
+                restBud();
+                
             }
         }
     }
@@ -440,5 +564,15 @@ public class right4Amogus extends LinearOpMode {
         mDrive.freeze();
         telemetry.addData("movement", " done.");
         telemetry.update();
+    }
+    void tagToTelemetry(AprilTagDetection detection)
+    {
+        telemetry.addLine(String.format("\nDetected tag ID=%d", detection.id));
+        telemetry.addLine(String.format("Translation X: %.2f feet", detection.pose.x*FEET_PER_METER));
+        telemetry.addLine(String.format("Translation Y: %.2f feet", detection.pose.y*FEET_PER_METER));
+        telemetry.addLine(String.format("Translation Z: %.2f feet", detection.pose.z*FEET_PER_METER));
+        telemetry.addLine(String.format("Rotation Yaw: %.2f degrees", Math.toDegrees(detection.pose.yaw)));
+        telemetry.addLine(String.format("Rotation Pitch: %.2f degrees", Math.toDegrees(detection.pose.pitch)));
+        telemetry.addLine(String.format("Rotation Roll: %.2f degrees", Math.toDegrees(detection.pose.roll)));
     }
 }
