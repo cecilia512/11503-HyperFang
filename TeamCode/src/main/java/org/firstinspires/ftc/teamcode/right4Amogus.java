@@ -228,7 +228,7 @@ public class right4Amogus extends LinearOpMode {
                 linearMovement(-35, 1.5, 0.0004, 0.00007, 0.000068);
                 sleep(1500);
                 restBud();
-                
+
             }
         }
     }
