@@ -164,7 +164,7 @@ public class RobotTeleopTank_Iterative extends OpMode{
 
         leftBack.setPower(tog*lbco);
         leftFront.setPower(tog*lfco);
-        rightBack.setPower(tog*rbco);
+        rightBack.setPower(tog*rbco*1.15);
         rightFront.setPower(tog*rfco);
 
         double clawOpen    = gamepad2.right_trigger * .6;// * TRY .5 oscilloscope

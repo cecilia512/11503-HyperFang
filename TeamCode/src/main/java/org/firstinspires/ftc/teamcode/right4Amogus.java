@@ -208,25 +208,26 @@ public class right4Amogus extends LinearOpMode {
 
             }
             else {
-                linearMovement(38, 1.5, 0.0004, 0.00007, 0.000068);//kp 0.0004 kI 0.00007 kD 0.000068
+               /* linearMovement(29, 1.5, 0.0006, 0.00007, 0.00002);//kp 0.0004 kI 0.00007 kD 0.000068
                 sleep(1500);
+                linearMovement(-11, .5, .0006, .00007, .00002 );
                 //larger on right idk why but it helps
-                strafeMovement(0, "RIGHT");
+              //  strafeMovement(0, "RIGHT");
                 sleep(1000);
-                turnDegree(-68, .5);//-70
+                turnDegree(-61, .5);//-70
                 sleep(500);
-                linearMovement(30, 1, 0.0004, 0.00007, 0.000068);
+                linearMovement(20, 1, 0.0004, 0.00007, 0.000068);
                 sleep(1000);
                 linearMovement(-35, 1.5, 0.0004, 0.00007, 0.000068);
-                sleep(1500);
-                strafeMovement(1000, "RIGHT");
+                sleep(1500);*/
+                strafeMovement(-50, 1.5, 0.0005, 0.00007, 0.00004);
                 sleep(800);
-                strafeMovement(-1000, "RIGHT");
-                sleep(1100);
+                strafeMovement(50, 1.5, 0.0004, 0.00007, 0.000068);
+                sleep(1100);/*
                 linearMovement(35, 1.5, 0.0004, 0.00007, 0.000068);
                 sleep(1500);
                 linearMovement(-35, 1.5, 0.0004, 0.00007, 0.000068);
-                sleep(1500);
+                sleep(1500);*/
                 restBud();
 
             }
@@ -241,20 +242,72 @@ public class right4Amogus extends LinearOpMode {
         mDrive.FR.setVelocity(0);
         mDrive.FL.setVelocity(0);
     }
-    public void strafeMovement(double rate, String direction){
+    public void strafeMovement(double distance, double tf, double kP, double kI, double kD) {
         mDrive.resetEncoders();
-        if (direction.equals("RIGHT")) {
-            mDrive.FL.setVelocity(-rate); //right strafe
-            mDrive.BL.setVelocity(rate);
-            mDrive.FR.setVelocity(-rate);
-            mDrive.BR.setVelocity(rate);
-        }
+        double conversionIndex = 500.04; // ticks per inch
+        double timeFrame = tf; //distance * distanceTimeIndex;
+        double errorMargin = 5;
+        double powerFloor = 0;
+        double powerCeiling = 1;
 
-        if (direction.equals("LEFT")) {
-            mDrive.FL.setVelocity(rate); //left strafe
-            mDrive.BL.setVelocity(-rate);
-            mDrive.FR.setVelocity(rate);
-            mDrive.BR.setVelocity(-rate);
+        ElapsedTime clock = new ElapsedTime();
+        clock.reset();
+        mDrive.resetEncoders();
+
+        double targetTick = -1 * distance * conversionIndex;
+        telemetry.addData("target tick", targetTick);
+        telemetry.update();
+
+
+        double error = targetTick;
+        double errorPrev = error;
+        double time = clock.seconds();
+        double timePrev = time;
+
+        double p, d, output;
+        double i = 0;
+
+        while (clock.seconds() < timeFrame && Math.abs(error) > errorMargin && opModeIsActive()) {
+            errorPrev = error;
+            timePrev = time;
+
+            double tempAvg = targetTick > 0 ? mDrive.getEncoderAvg() : -mDrive.getEncoderAvg();
+
+            error = targetTick - tempAvg;
+            time = clock.seconds();
+
+            p = Math.abs(error) / 33.0 * kP;
+            i += (time - timePrev) * Math.abs(error) / 33.0 * kI;
+            d = Math.abs((error - errorPrev) / (time - timePrev) / 33.0 * kD);
+
+            output = p + i - d;
+            telemetry.addData("output", output);
+            output = Math.max(output, powerFloor);
+            output = Math.min(output, powerCeiling);
+            if (error < 0) output *= -1;
+
+            double currentAngle = imu.getAngularOrientation().firstAngle;
+            double raw = globalAngle - currentAngle;
+            if (raw > 180)
+                raw -= 360;
+            if (raw < -180)
+                raw += 360;
+            double fudgeFactor = 1.0 - raw / 40.0;
+
+
+            if (error > 0) {
+                mDrive.FL.setPower(-output);
+                mDrive.BL.setPower(output);
+                mDrive.FR.setPower(-output);
+                mDrive.BR.setPower(output * 0.37);
+            } else {
+                mDrive.FL.setPower(-output); //backwards
+                mDrive.BL.setPower(output); //backwards
+                mDrive.FR.setPower(-output); //forwards
+                mDrive.BR.setPower(output * 0.37); //forwards
+
+            }
+            mDrive.freeze();
         }
     }
 
@@ -477,14 +530,14 @@ public class right4Amogus extends LinearOpMode {
                 mDrive.FL.setPower(output);
                 mDrive.BL.setPower(output);
                 mDrive.FR.setPower(output);
-                mDrive.BR.setPower(output * 0.35);
+                mDrive.BR.setPower(output * 0.37);
             }
             else
             {
                 mDrive.FL.setPower(-output); //backwards
                 mDrive.BL.setPower(-output); //backwards
                 mDrive.FR.setPower(-output); //forwards
-                mDrive.BR.setPower(-output * 0.35); //forwards
+                mDrive.BR.setPower(-output * 0.37); //forwards
             }
         }
         mDrive.freeze();
