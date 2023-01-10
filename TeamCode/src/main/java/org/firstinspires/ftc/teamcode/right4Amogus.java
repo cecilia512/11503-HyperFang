@@ -220,9 +220,9 @@ public class right4Amogus extends LinearOpMode {
                 sleep(1000);
                 linearMovement(-35, 1.5, 0.0004, 0.00007, 0.000068);
                 sleep(1500);*/
-                strafeMovement(-50, 1.5, 0.0005, 0.00007, 0.00004);
+                strafeMovement(50, 1.5, 0.0005, 0.00007, 0.00004);
                 sleep(800);
-                strafeMovement(50, 1.5, 0.0004, 0.00007, 0.000068);
+                strafeMovement(-50, 1.5, 0.0004, 0.00007, 0.000068);
                 sleep(1100);/*
                 linearMovement(35, 1.5, 0.0004, 0.00007, 0.000068);
                 sleep(1500);
@@ -243,6 +243,9 @@ public class right4Amogus extends LinearOpMode {
         mDrive.FL.setVelocity(0);
     }
     public void strafeMovement(double distance, double tf, double kP, double kI, double kD) {
+
+        double rightcoeff = .99;
+        double leftcoeff  = .99;
         mDrive.resetEncoders();
         double conversionIndex = 500.04; // ticks per inch
         double timeFrame = tf; //distance * distanceTimeIndex;
@@ -299,14 +302,14 @@ public class right4Amogus extends LinearOpMode {
                 mDrive.FL.setPower(-output);
                 mDrive.BL.setPower(output);
                 mDrive.FR.setPower(-output);
-                mDrive.BR.setPower(output);
+                mDrive.BR.setPower(output * 1.05);
             } else {
                 mDrive.FL.setPower(-output); //backwards
                 mDrive.BL.setPower(output); //backwards
                 mDrive.FR.setPower(-output); //forwards
                 mDrive.BR.setPower(output); //forwards
-6
-        
+
+
             }
             mDrive.freeze();
         }

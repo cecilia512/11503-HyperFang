@@ -151,22 +151,24 @@ public class goofyahhaprilauto extends LinearOpMode
         }
 
         if (tagOfInterest == null || tagOfInterest.id == left) {
-            gahr.linearMovement(25.5,1.5, 0.0004, 0.00007, 0.000068);
+            gahr.linearMovement(29,1.5, 0.0004, 0.00007, 0.000068);
             sleep(595);
-            gahr.strafeMovement(1228, "LEFT");
+           // gahr.strafeMovement(4000, "LEFT");
+            gahr.turnDegree(38, .5);
             sleep(1000);
+            gahr.linearMovement(31,1.5, .0004, .00007, .000068);
             gahr.restBud();
         } else if (tagOfInterest.id == middle) {
-            gahr.linearMovement(25,1.5, 0.0004, 0.00007, 0.000068);
+            gahr.linearMovement(26,1.5, 0.0004, 0.00007, 0.000068);
             sleep(595);
             sleep(1000);
             gahr.restBud();
 
         } else {
-            gahr.linearMovement(25.5,1.5, 0.0004, 0.00007, 0.000068);
+            gahr.linearMovement(31,1.5, 0.0004, 0.00007, 0.000068);
             sleep(595);
             //larger on right idk why but it helps
-            gahr.strafeMovement(1228, "RIGHT");
+            gahr.strafeMovement(1235, "RIGHT");
             sleep(1000);
             gahr.restBud();
 
