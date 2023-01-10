@@ -70,7 +70,7 @@ public class hardwareMap {
        // Filler2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
        // Laft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-       // Duckie.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+       // Duckise.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
       //  Filler1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
        // Filler2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
