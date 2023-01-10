@@ -299,13 +299,14 @@ public class right4Amogus extends LinearOpMode {
                 mDrive.FL.setPower(-output);
                 mDrive.BL.setPower(output);
                 mDrive.FR.setPower(-output);
-                mDrive.BR.setPower(output * 0.37);
+                mDrive.BR.setPower(output);
             } else {
                 mDrive.FL.setPower(-output); //backwards
                 mDrive.BL.setPower(output); //backwards
                 mDrive.FR.setPower(-output); //forwards
-                mDrive.BR.setPower(output * 0.37); //forwards
-
+                mDrive.BR.setPower(output); //forwards
+6
+        
             }
             mDrive.freeze();
         }
