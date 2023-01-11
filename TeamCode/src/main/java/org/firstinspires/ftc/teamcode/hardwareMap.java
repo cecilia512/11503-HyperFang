@@ -19,6 +19,9 @@ public class hardwareMap {
     public CRServo InOut; //port _
     public DcMotor Duckie; //port _
     public DcMotor.RunMode RUN_USING_ENCODER;
+    public DcMotorEx  liftOne;
+    public DcMotorEx liftTwo;
+    public CRServo  vexClaw;
 
     public BNO055IMU imu;
 
@@ -29,6 +32,10 @@ public class hardwareMap {
         FL = (DcMotorEx)hardwareMap.get(DcMotor.class, "leftFront");
         BL = (DcMotorEx)hardwareMap.get(DcMotor.class, "leftBack");
 
+        liftOne     = (DcMotorEx)hardwareMap.get(DcMotor.class, "liftOne");
+        liftTwo     = (DcMotorEx) hardwareMap.get(DcMotor.class, "liftTwo");
+        vexClaw     = hardwareMap.crservo.get("vexClaw");
+
         BR.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         BL.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         FR.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
@@ -38,6 +45,11 @@ public class hardwareMap {
         FL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         FR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         BL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        liftOne.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        liftOne.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        liftTwo.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        liftTwo.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
       //  Laft = hardwareMap.get(DcMotor.class, "L1"); //lift motor imo
       //  InOut = hardwareMap.get(CRServo.class, "IO1"); //intake\outtake motor

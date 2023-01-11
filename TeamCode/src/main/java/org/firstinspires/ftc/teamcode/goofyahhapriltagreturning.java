@@ -73,6 +73,46 @@ public class goofyahhapriltagreturning {
         telemetry.setMsTransmissionInterval(50);
     }
 
+    public void lift(double distance){
+        telemetry.addLine("made it");
+        telemetry.update();
+        mDrive.resetEncoders();
+        ElapsedTime clock = new ElapsedTime();
+        clock.reset();
+        double timeframe = 1;
+        double error = distance;
+        double conversionIndex = 536;
+        double targetTick = distance * conversionIndex;
+        double errorPrev = error;
+
+        double time = clock.seconds();
+        double timePrev = time;
+
+        double kP = 0.0118;
+        double kI = 0.005;
+        double kD = 0.002;
+        double p, d, output;
+        double i = 0;
+        while (clock.seconds() < timeframe && Math.abs(error) > 1 && opMode.opModeIsActive()){
+            errorPrev = error;
+            timePrev = time;
+
+            double tempAvg = targetTick > 0 ? mDrive.getEncoderAvg() : -mDrive.getEncoderAvg();
+            error = targetTick - tempAvg;
+            time = clock.seconds();
+
+            p = Math.abs(error) * kP;
+            i += (time - timePrev) * Math.abs(error) * kI;
+            d = ((Math.abs(error) - Math.abs(errorPrev)) / (time - timePrev)) * kD;
+
+            output = p + i - d;
+
+            if ( distance < 0 ){
+                mDrive.liftOne.setVelocity(-output);
+                mDrive.liftOne.setVelocity(output);
+            }
+        }
+    }
     public void linearMovement(double distance, double tf, double kP, double kI, double kD) {
         mDrive.resetEncoders();
         double conversionIndex = 500.04; // ticks per inch
