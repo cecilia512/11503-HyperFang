@@ -21,25 +21,15 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-import org.firstinspires.ftc.teamcode.AprilTagDetectionPipeline;
-import org.firstinspires.ftc.teamcode.hardwareMap;
 import org.openftc.apriltag.AprilTagDetection;
-import org.openftc.easyopencv.OpenCvCamera;
-import org.openftc.easyopencv.OpenCvCameraFactory;
-import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayList;
 
 @Autonomous
-public class goofyahhaprilauto extends LinearOpMode
+public class hernyisepico extends LinearOpMode
 {
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
 
@@ -151,12 +141,11 @@ public class goofyahhaprilauto extends LinearOpMode
         }
 
         if (tagOfInterest == null || tagOfInterest.id == left) {
-            gahr.linearMovement(29,1.5, 0.0004, 0.00007, 0.000068);
-            sleep(595);
+            gahr.linearMovement(63,1.5, 0.0004, 0.00007, 0.000068);
+            sleep(1500);
            // gahr.strafeMovement(4000, "LEFT");
-            gahr.turnDegree(38, .5);
+            gahr.turnDegree(-20, .5);
             sleep(1000);
-            gahr.linearMovement(31,1.5, .0004, .00007, .000068);
             gahr.restBud();
         } else if (tagOfInterest.id == middle) {
             gahr.linearMovement(26,1.5, 0.0004, 0.00007, 0.000068);
@@ -165,12 +154,11 @@ public class goofyahhaprilauto extends LinearOpMode
             gahr.restBud();
 
         } else {
-            gahr.linearMovement(18,2, 0.0004, 0.00007, 0.000068);
+            gahr.linearMovement(33,1.5, 0.0004, 0.00007, 0.000068);
+            sleep(595);
+            //larger on right idk why but it helps
+            gahr.strafeMovement(1300, "RIGHT");
             sleep(1000);
-            // gahr.strafeMovement(4000, "LEFT");
-            gahr.turnDegree(-34, .5);
-            sleep(1000);
-            gahr.linearMovement(31,1.5, .0004, .00007, .000068);
             gahr.restBud();
 
         }
