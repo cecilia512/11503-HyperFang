@@ -65,24 +65,32 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
             if (!isStopRequested()){
                 switch (level) {
                     case 1:
-                        linearMovement(25.5,1.5, 0.0004, 0.00007, 0.000068);
+                        /*linearMovement(25.5,1.5, 0.0004, 0.00007, 0.000068);
                         sleep(595);
                         strafeMovement(1225, "LEFT");
-                        sleep(1000);
+                        sleep(1000);*/
+                        turnDegree(90,5);
+                        sleep(5000);
                         restBud();
                         break;
                     case 2:
-                        linearMovement(30,1.5, 0.0004, 0.00007, 0.000068);
+                       /* linearMovement(30,1.5, 0.0004, 0.00007, 0.000068);
                         sleep(595);
-                        sleep(1000);
+                        sleep(1000);*/
+                        turnDegree(90,5);
+                        sleep(5000);
+                        restBud();
                         restBud();
                         break;
                     default:
-                        linearMovement(25.5,1.5, 0.0004, 0.00007, 0.000068);
+                        /*linearMovement(25.5,1.5, 0.0004, 0.00007, 0.000068);
                         sleep(595);
                         //larger on right idk why but it helps
                        strafeMovement(1225, "RIGHT");
-                        sleep(1000);
+                        sleep(1000);*/
+                        turnDegree(90,5);
+                        sleep(5000);
+                        restBud();
                         restBud();
                         break;
                 }
@@ -258,6 +266,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
        } */
 
         public void turnDegree(double degree, double timeframe) {
+
             telemetry.addLine("made it");
             telemetry.update();
             lastAngles = imu.getAngularOrientation();
@@ -286,9 +295,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
             double time = clock.seconds();
             double timePrev = time;
 
-            double kP = 0.0118;
-            double kI = 0.005;
-            double kD = 0.002;
+            double kPt = 0.05;//0.0118
+            double kIt = 0.00;//0.005
+            double kDt = 0.00;//0.002
 
             double p, d, output;
             double i = 0;
@@ -310,9 +319,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
                 if (error < -180)
                     error += 360;
 
-                p = Math.abs(error) * kP;
-                i += (time - timePrev) * Math.abs(error) * kI;
-                d = ((Math.abs(error) - Math.abs(errorPrev)) / (time - timePrev)) * kD;
+                p = Math.abs(error) * kPt;
+                i += (time - timePrev) * Math.abs(error) * kIt;
+                d = ((Math.abs(error) - Math.abs(errorPrev)) / (time - timePrev)) * kDt;
 
                 output = p + i + d;
 
@@ -361,9 +370,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
             telemetry.addData("target tick", targetTick);
             telemetry.update();
 
-            double kP = 0.0004;
-            double kI = 0.00007;
-            double kD = 0.000068;
+            double kP = 0.0011;//0.000133
+            double kI = 0.000;//0.0001925
+            double kD = 0.000;// 0.0001216
 
             double error = targetTick;
             double errorPrev = error;

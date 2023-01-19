@@ -141,24 +141,25 @@ public class hernyisepico extends LinearOpMode
         }
 
         if (tagOfInterest == null || tagOfInterest.id == left) {
-            gahr.linearMovement(63,1.5, 0.0004, 0.00007, 0.000068);
+            gahr.linearMovement(20,1.5, 0.0004, 0.00007, 0.000068);
             sleep(1500);
            // gahr.strafeMovement(4000, "LEFT");
-            gahr.turnDegree(-20, .5);
-            sleep(1000);
+            gahr.turnDegree(-90, .5);
+            sleep(500);
             gahr.restBud();
         } else if (tagOfInterest.id == middle) {
             gahr.linearMovement(26,1.5, 0.0004, 0.00007, 0.000068);
             sleep(595);
-            sleep(1000);
+            gahr.turnDegree(-90, .5);
+            sleep(500);
             gahr.restBud();
 
         } else {
             gahr.linearMovement(33,1.5, 0.0004, 0.00007, 0.000068);
             sleep(595);
             //larger on right idk why but it helps
-            gahr.strafeMovement(1300, "RIGHT");
-            sleep(1000);
+            gahr.turnDegree(-90, .5);
+            sleep(500);
             gahr.restBud();
 
         }
