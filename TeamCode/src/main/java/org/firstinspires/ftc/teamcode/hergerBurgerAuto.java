@@ -69,16 +69,16 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
                         sleep(595);
                         strafeMovement(1225, "LEFT");
                         sleep(1000);*/
-                        turnDegree(90,5);
-                        sleep(5000);
+                        turnDegree(90,1.5);
+                        sleep(1500);
                         restBud();
                         break;
                     case 2:
                        /* linearMovement(30,1.5, 0.0004, 0.00007, 0.000068);
                         sleep(595);
                         sleep(1000);*/
-                        turnDegree(90,5);
-                        sleep(5000);
+                        turnDegree(90,1.5);
+                        sleep(1500);
                         restBud();
                         restBud();
                         break;
@@ -88,8 +88,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
                         //larger on right idk why but it helps
                        strafeMovement(1225, "RIGHT");
                         sleep(1000);*/
-                        turnDegree(90,5);
-                        sleep(5000);
+                        turnDegree(90,1.5);
+                        sleep(1500);
                         restBud();
                         restBud();
                         break;
@@ -299,9 +299,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
             double time = clock.seconds();
             double timePrev = time;
 
-            double kPt = 0.045;//0.0118
-            double kIt = 0.001;//0.005
-            double kDt = 0.00;//0.002
+            double kPt = 0.0453;//0.0118
+            double kIt = 0.0007;//0.005
+            double kDt = 0.0014;//0.002
 
             double p, d, output;
             double i = 0;
