@@ -267,9 +267,13 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
         public void turnDegree(double degree, double timeframe) {
 
+            mDrive.resetEncoders();
+
             telemetry.addLine("made it");
             telemetry.update();
+
             lastAngles = imu.getAngularOrientation();
+
             double currentAngle = lastAngles.firstAngle;
             ElapsedTime clock = new ElapsedTime();
             clock.reset();
@@ -295,8 +299,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
             double time = clock.seconds();
             double timePrev = time;
 
-            double kPt = 0.05;//0.0118
-            double kIt = 0.00;//0.005
+            double kPt = 0.045;//0.0118
+            double kIt = 0.001;//0.005
             double kDt = 0.00;//0.002
 
             double p, d, output;
@@ -322,8 +326,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
                 p = Math.abs(error) * kPt;
                 i += (time - timePrev) * Math.abs(error) * kIt;
                 d = ((Math.abs(error) - Math.abs(errorPrev)) / (time - timePrev)) * kDt;
-
-                output = p + i + d;
+                double conversionIndex = 500.04;
+                output = (p + i + d) * conversionIndex;
 
 
 
@@ -339,95 +343,21 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
                 if (error > 0)
                 {
-                    mDrive.FL.setPower(output);
-                    mDrive.BL.setPower(output);
-                    mDrive.FR.setPower(output);
-                    mDrive.BR.setPower(output * 0.35);
+                    mDrive.FL.setVelocity(output);
+                    mDrive.BL.setVelocity(output);
+                    mDrive.FR.setVelocity(output);
+                    mDrive.BR.setVelocity(output * 0.35);
                 }
                 else
                 {
-                    mDrive.FL.setPower(-output); //backwards
-                    mDrive.BL.setPower(-output); //backwards
-                    mDrive.FR.setPower(-output); //forwards
-                    mDrive.BR.setPower(-output * 0.35); //forwards
+                    mDrive.FL.setVelocity(-output); //backwards
+                    mDrive.BL.setVelocity(-output); //backwards
+                    mDrive.FR.setVelocity(-output); //forwards
+                    mDrive.BR.setVelocity(-output * 0.35); //forwards
                 }
             }
             mDrive.freeze();
         }
 
-        public void floorit(double distance, double timeframe) { //literally why the fuck do you even exist
-            double conversionIndex = NUMBER_OF_ENCODER_TICKS_PER_REVOLUTION / MOTOR_TO_INCHES; // ticks per inch
-            double timeFrame = timeframe; //distance * distanceTimeIndex;
-            double errorMargin = 5;
-            double powerFloor = 0;
-            double powerCeiling = 1;
 
-            ElapsedTime clock = new ElapsedTime();
-            clock.reset();
-            mDrive.resetEncoders();
-
-            double targetTick = -1 * distance * conversionIndex;
-            telemetry.addData("target tick", targetTick);
-            telemetry.update();
-
-            double kP = 0.0011;//0.000133
-            double kI = 0.000;//0.0001925
-            double kD = 0.000;// 0.0001216
-
-            double error = targetTick;
-            double errorPrev = error;
-            double time = clock.seconds();
-            double timePrev = time;
-
-            double  p, d, output;
-            double i = 0;
-
-            while (clock.seconds() < timeFrame && Math.abs(error) > errorMargin && opModeIsActive()) {
-                //output = linearPID.PIDOutput(targetTick,averageEncoderTick(),clock.seconds());
-
-                errorPrev = error;
-                timePrev = time;
-
-                double tempAvg = targetTick > 0 ? mDrive.getEncoderAvg() : -mDrive.getEncoderAvg();
-
-                error = targetTick - tempAvg;
-                time = clock.seconds();
-                //telemetry.addData("error", error);
-                //telemetry.addData("time", time);
-
-                p = Math.abs(error)  * kP;
-                i += (time - timePrev) * Math.abs(error) * kI;
-                d = Math.abs((error - errorPrev) / (time - timePrev) * kD);
-
-                telemetry.addData("P", p);
-                telemetry.addData("I", i);
-                telemetry.addData("D", d);
-
-
-                output = p + i + d;
-                telemetry.addData("output", output);
-                output = Math.max(output, powerFloor);
-                output = Math.min(output, powerCeiling);
-                if (error < 0) output *= -1;
-
-                double currentAngle = imu.getAngularOrientation().firstAngle;
-                double raw = globalAngle - currentAngle;
-                if (raw > 180)
-                    raw -= 360;
-                if (raw < -180)
-                    raw += 360;
-                double fudgeFactor = 1 - raw / 30;
-
-                mDrive.FL.setPower(1);
-                mDrive.FR.setPower(-1);
-                mDrive.BL.setPower(1);
-                mDrive.BR.setPower(-1);
-
-                telemetry.addData("error", error);
-                telemetry.update();
-            }
-            mDrive.freeze();
-            telemetry.addData("movement", " done.");
-            telemetry.update();
-        }
     }
