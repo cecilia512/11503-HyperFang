@@ -154,7 +154,7 @@ public class goofyahhaprilauto extends LinearOpMode
             gahr.linearMovement(29,1.5, 0.0004, 0.00007, 0.000068);
             sleep(595);
            // gahr.strafeMovement(4000, "LEFT");
-            gahr.turnDegree(38.75, .5);
+            gahr.turnDegree(70, .5);
             sleep(1000);
             gahr.linearMovement(31,1.5, .0004, .00007, .000068);
             gahr.restBud();
@@ -168,7 +168,7 @@ public class goofyahhaprilauto extends LinearOpMode
             gahr.linearMovement(18,2, 0.0004, 0.00007, 0.000068);
             sleep(1000);
             // gahr.strafeMovement(4000, "LEFT");
-            gahr.turnDegree(-34.5, .5);
+            gahr.turnDegree(-90, .5);
             sleep(1000);
             gahr.linearMovement(31,1.5, .0004, .00007, .000068);
             gahr.restBud();
