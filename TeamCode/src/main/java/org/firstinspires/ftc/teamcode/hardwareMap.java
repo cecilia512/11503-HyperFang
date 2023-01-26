@@ -27,10 +27,10 @@ public class hardwareMap {
 
     public void init(HardwareMap h) {
         hardwareMap = h;
-        BR = (DcMotorEx)hardwareMap.get( DcMotor.class, "rightBack");
-        FR = (DcMotorEx)hardwareMap.get(DcMotor.class, "rightFront");
-        FL = (DcMotorEx)hardwareMap.get(DcMotor.class, "leftFront");
-        BL = (DcMotorEx)hardwareMap.get(DcMotor.class, "leftBack");
+        BR = (DcMotorEx)hardwareMap.get( DcMotorEx.class, "rightBack");
+        FR = (DcMotorEx)hardwareMap.get(DcMotorEx.class, "rightFront");
+        FL = (DcMotorEx)hardwareMap.get(DcMotorEx.class, "leftFront");
+        BL = (DcMotorEx)hardwareMap.get(DcMotorEx.class, "leftBack");
 
         liftOne     = (DcMotorEx)hardwareMap.get(DcMotor.class, "liftOne");
         liftTwo     = (DcMotorEx) hardwareMap.get(DcMotor.class, "liftTwo");
@@ -41,10 +41,10 @@ public class hardwareMap {
         FR.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         FL.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
 
-        BR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        FL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        FR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        BL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        BR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        FL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        FR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        BL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
 
         liftOne.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         liftOne.setMode(DcMotor.RunMode.RUN_USING_ENCODER);

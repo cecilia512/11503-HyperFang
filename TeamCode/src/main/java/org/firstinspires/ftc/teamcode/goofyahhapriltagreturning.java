@@ -282,14 +282,14 @@ public class goofyahhapriltagreturning {
             {
                 mDrive.FL.setPower(output);
                 mDrive.BL.setPower(output);
-                mDrive.FR.setPower(0);
+                mDrive.FR.setPower(output);
                 mDrive.BR.setPower(output);
             }
             else
             {
                 mDrive.FL.setPower(-output); //backwards
                 mDrive.BL.setPower(-output); //backwards
-                mDrive.FR.setPower(0); //forwards
+                mDrive.FR.setPower(-output); //forwards
                 mDrive.BR.setPower(-output); //forwards
             }
         }
