@@ -153,26 +153,28 @@ public class goofyahhaprilauto extends LinearOpMode
         }
 
         if (tagOfInterest == null || tagOfInterest.id == left) {
-            gahr.linearMovement(29,1.5, 0.0004, 0.00007, 0.000068);
+            gahr.linearMovement(34,1.5, 0.0004, 0.00007, 0.000068);
             sleep(595);
-           // gahr.strafeMovement(4000, "LEFT");
-            gahr.turnDegree(70, .5);
+            gahr.turnDegree(-5,.15);
+            gahr.strafeMovement(1250, "LEFT");
+            //gahr.turnDegree(70, .5);
             sleep(1000);
-            gahr.linearMovement(31,1.5, .0004, .00007, .000068);
+            //gahr.linearMovement(31,1.5, .0004, .00007, .000068);
             gahr.restBud();
         } else if (tagOfInterest.id == middle) {
-            gahr.linearMovement(26,1.5, 0.0004, 0.00007, 0.000068);
+            gahr.linearMovement(29,1.5, 0.0004, 0.00007, 0.000068);
             sleep(595);
             sleep(1000);
             gahr.restBud();
 
         } else {
-            gahr.linearMovement(18,2, 0.0004, 0.00007, 0.000068);
+            gahr.linearMovement(34,1.5, 0.0004, 0.00007, 0.000068);
+            sleep(595);
+            gahr.turnDegree(5, .1);
+            gahr.strafeMovement(1250, "RIGHT");
+
             sleep(1000);
-            // gahr.strafeMovement(4000, "LEFT");
-            gahr.turnDegree(-90, .5);
-            sleep(1000);
-            gahr.linearMovement(31,1.5, .0004, .00007, .000068);
+            //gahr.linearMovement(31,1.5, .0004, .00007, .000068);
             gahr.restBud();
 
         }

@@ -41,10 +41,10 @@ public class hardwareMap {
         FR.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         FL.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
 
-        BR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-        FL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-        FR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-        BL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        //BR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        //FL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        //FR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        //BL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
 
         liftOne.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         liftOne.setMode(DcMotor.RunMode.RUN_USING_ENCODER);

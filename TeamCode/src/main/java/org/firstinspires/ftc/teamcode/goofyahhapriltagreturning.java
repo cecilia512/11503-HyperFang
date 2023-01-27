@@ -63,6 +63,7 @@ public class goofyahhapriltagreturning {
                     camera.startStreaming(800, 448, OpenCvCameraRotation.UPRIGHT);
                 }
 
+
                 @Override
                 public void onError(int errorCode) {
 
@@ -165,15 +166,15 @@ public class goofyahhapriltagreturning {
                 raw += 360;
 
             if (distance > 0) {
-                mDrive.FL.setPower(output);
+                mDrive.FL.setPower(output * 0.95);
                 mDrive.FR.setPower(-output);
-                mDrive.BL.setPower(output);
+                mDrive.BL.setPower(output * 0.95);
                 mDrive.BR.setPower(-output); //-.35
 
             } else {
-                mDrive.FL.setPower(-output);
+                mDrive.FL.setPower(-output * 0.95);
                 mDrive.FR.setPower(output);
-                mDrive.BL.setPower(-output);
+                mDrive.BL.setPower(-output * 0.95);
                 mDrive.BR.setPower(output);
 
             }
@@ -193,8 +194,8 @@ public class goofyahhapriltagreturning {
     public void strafeMovement(double rate, String direction){
         mDrive.resetEncoders();
         if (direction.equals("RIGHT")) {
-            mDrive.FL.setVelocity(-rate); //right strafe
-            mDrive.BL.setVelocity(rate);
+            mDrive.FL.setVelocity(0.95*-rate); //right strafe
+            mDrive.BL.setVelocity(0.95*rate);
             mDrive.FR.setVelocity(-rate);
             mDrive.BR.setVelocity(rate);
         }
@@ -202,8 +203,8 @@ public class goofyahhapriltagreturning {
         if (direction.equals("LEFT")) {
             mDrive.FL.setVelocity(rate); //left strafe
             mDrive.BL.setVelocity(-rate);
-            mDrive.FR.setVelocity(rate);
-            mDrive.BR.setVelocity(-rate);
+            mDrive.FR.setVelocity(0.95*rate);
+            mDrive.BR.setVelocity(0.95*-rate);
         }
     }
 
