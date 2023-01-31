@@ -192,6 +192,26 @@ public class goofyahhapriltagreturning {
         mDrive.FL.setVelocity(0);
     }
 
+    public void clawGetr(double rate){
+        mDrive.resetEncoders();
+        mDrive.vexClaw.setPower(rate);
+    }
+
+    public void mover(double rate){
+        mDrive.resetEncoders();
+        mDrive.BR.setVelocity(-rate);
+        mDrive.BL.setVelocity(rate);
+        mDrive.FR.setVelocity(-rate);
+        mDrive.FL.setVelocity(rate);
+
+    }
+
+    public void  badLiftMovement(double rate) {
+        mDrive.resetEncoders();
+        mDrive.liftOne.setVelocity(-rate);
+        mDrive.liftTwo.setVelocity(rate);
+    }
+
     public void strafeMovement(double rate, String direction){
         mDrive.resetEncoders();
         if (direction.equals("RIGHT")) {
@@ -208,6 +228,8 @@ public class goofyahhapriltagreturning {
             mDrive.BR.setVelocity(0.95*-rate);
         }
     }
+
+
 
     public void turnDegree(double degree, double timeframe) {
         telemetry.addLine("made it");

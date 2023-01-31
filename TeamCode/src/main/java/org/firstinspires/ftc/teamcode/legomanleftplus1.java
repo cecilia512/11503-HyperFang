@@ -149,14 +149,63 @@ public class legomanleftplus1 extends LinearOpMode
             gahr.strafeMovement(600, "LEFT");
             //gahr.turnDegree(70, .5);
             sleep(1000);
-            gahr.lift(4000);
+            //gahr.lift(4000);
+
             //sleep(1000);
             //gahr.linearMovement(31,1.5, .0004, .00007, .000068);
             gahr.restBud();
         } else if (tagOfInterest.id == middle) {
-            gahr.linearMovement(29,1.5, 0.0004, 0.00007, 0.000068);
+            /*gahr.linearMovement(29,1.5, 0.0004, 0.00007, 0.000068);
+            sleep(595);*/
+            gahr.clawGetr(0.5);
+            sleep(3000);
+            gahr.linearMovement(36,1.5, 0.0004, 0.00007, 0.000068);
             sleep(595);
+            stop();
+            gahr.strafeMovement(600, "LEFT");
             sleep(1000);
+            stop();
+            gahr.strafeMovement(0,"LEFT");
+            sleep(10);
+            gahr.badLiftMovement(4000);
+            sleep(3000);
+            gahr.badLiftMovement(0);
+            sleep(10);
+            gahr.linearMovement(7, 1.5, 0.0004, 0.00007, 0.000068);
+            sleep(1000);
+            stop();
+            gahr.linearMovement(0,1.5,0,0,0);
+            sleep(10);
+            /*gahr.mover(-200);
+            sleep(600);
+            gahr.mover(0);
+            sleep(10);
+            stop();*/
+            gahr.badLiftMovement(-1500);
+            sleep(1500);
+            stop();
+            gahr.badLiftMovement(0);
+            sleep(10);
+            gahr.clawGetr(-0.5);
+            sleep( 500);
+            gahr.clawGetr(0);
+            sleep(10);
+            stop();
+            gahr.badLiftMovement(1000);
+            sleep(1500);
+            gahr.badLiftMovement(0);
+            sleep(0);
+            gahr.mover(1000);
+            sleep(500);
+            gahr.mover(0);
+            sleep(10);
+            //gahr.badLiftMovement(-3000);
+            sleep(3000);
+            stop();
+
+
+            /*gahr.linearMovement(-5, 1.5, .0004, .00007, .000068);
+            sleep(1000);*/
             gahr.restBud();
 
         } else {

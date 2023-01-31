@@ -32,8 +32,8 @@ public class hardwareMap {
         FL = (DcMotorEx)hardwareMap.get(DcMotorEx.class, "leftFront");
         BL = (DcMotorEx)hardwareMap.get(DcMotorEx.class, "leftBack");
 
-        liftOne     = (DcMotorEx)hardwareMap.get(DcMotor.class, "liftOne");
-        liftTwo     = (DcMotorEx) hardwareMap.get(DcMotor.class, "liftTwo");
+        liftOne     = (DcMotorEx)hardwareMap.get(DcMotorEx.class, "liftOne");
+        liftTwo     = (DcMotorEx) hardwareMap.get(DcMotorEx.class, "liftTwo");
         vexClaw     = hardwareMap.crservo.get("vexClaw");
 
         //BR.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);

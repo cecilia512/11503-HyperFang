@@ -173,7 +173,7 @@ public class goofyahhaprilauto extends LinearOpMode
             sleep(595);
             //gahr.turnDegree(6, .1);
             //sleep(100);
-            gahr.strafeMovement(1150, "RIGHT");
+            gahr.strafeMovement(1250, "RIGHT");
 
             sleep(1000);
             //gahr.linearMovement(31,1.5, .0004, .00007, .000068);
