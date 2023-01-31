@@ -21,26 +21,15 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-import org.firstinspires.ftc.teamcode.AprilTagDetectionPipeline;
-import org.firstinspires.ftc.teamcode.hardwareMap;
 import org.openftc.apriltag.AprilTagDetection;
-import org.openftc.easyopencv.OpenCvCamera;
-import org.openftc.easyopencv.OpenCvCameraFactory;
-import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayList;
 
 @Autonomous
-public class goofyahhaprilauto extends LinearOpMode
+public class legomanleftplus1 extends LinearOpMode
 {
 
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
@@ -157,9 +146,11 @@ public class goofyahhaprilauto extends LinearOpMode
             sleep(595);
             gahr.turnDegree(-3,.15);
             sleep(150);
-            gahr.strafeMovement(1150, "LEFT");
+            gahr.strafeMovement(600, "LEFT");
             //gahr.turnDegree(70, .5);
             sleep(1000);
+            gahr.lift(4000);
+            //sleep(1000);
             //gahr.linearMovement(31,1.5, .0004, .00007, .000068);
             gahr.restBud();
         } else if (tagOfInterest.id == middle) {

@@ -110,7 +110,7 @@ public class goofyahhapriltagreturning {
 
             if ( distance < 0 ){
                 mDrive.liftOne.setVelocity(-output);
-                mDrive.liftOne.setVelocity(output);
+                mDrive.liftTwo.setVelocity(output);
             }
         }
     }
@@ -165,18 +165,19 @@ public class goofyahhapriltagreturning {
             if (raw < -180)
                 raw += 360;
 
+            double harry = 2000;
+
             if (distance > 0) {
-                mDrive.FL.setPower(output * 0.95);
-                mDrive.FR.setPower(-output);
-                mDrive.BL.setPower(output * 0.95);
-                mDrive.BR.setPower(-output); //-.35
+                mDrive.FL.setVelocity(output * harry*.95);
+                mDrive.FR.setVelocity(-output*harry);
+                mDrive.BL.setVelocity(output * harry*.95);
+                mDrive.BR.setVelocity(-output*harry); //-.35
 
             } else {
-                mDrive.FL.setPower(-output * 0.95);
-                mDrive.FR.setPower(output);
-                mDrive.BL.setPower(-output * 0.95);
-                mDrive.BR.setPower(output);
-
+                mDrive.FL.setVelocity(-output * harry*.95);
+                mDrive.FR.setVelocity(output*harry);
+                mDrive.BL.setVelocity(-output * harry*.95);
+                mDrive.BR.setVelocity(output*harry);
             }
         }
         mDrive.freeze();

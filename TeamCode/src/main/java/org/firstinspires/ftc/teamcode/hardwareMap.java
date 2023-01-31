@@ -36,20 +36,20 @@ public class hardwareMap {
         liftTwo     = (DcMotorEx) hardwareMap.get(DcMotor.class, "liftTwo");
         vexClaw     = hardwareMap.crservo.get("vexClaw");
 
-        BR.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-        BL.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-        FR.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-        FL.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        //BR.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        //BL.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        //FR.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        //FL.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
 
-        //BR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-        //FL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-        //FR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-        //BL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        BR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        FL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        FR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        BL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
 
-        liftOne.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-        liftOne.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        liftTwo.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-        liftTwo.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //liftOne.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        liftOne.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        //liftTwo.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        liftTwo.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
 
       //  Laft = hardwareMap.get(DcMotor.class, "L1"); //lift motor imo
       //  InOut = hardwareMap.get(CRServo.class, "IO1"); //intake\outtake motor

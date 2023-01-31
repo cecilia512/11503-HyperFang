@@ -167,10 +167,10 @@ public class RobotTeleopTank_Iterative extends OpMode{
         double rbco = rb; //- 0.12 + (.35 / ( rb + 0.6));
         double rfco = rf; // - 0.12 + (.35 / ( rf + 0.6));
 
-        leftBack.setPower(tog*lbco);
-        leftFront.setPower(tog*lfco);
-        rightBack.setPower(tog*rbco*1.15);
-        rightFront.setPower(tog*rfco);
+        leftBack.setPower(tog*lbco*.88);
+        leftFront.setPower(tog*lfco*.88);
+        rightBack.setPower(tog*rbco*1.15*.88);
+        rightFront.setPower(tog*rfco*.88);
 
         double clawOpen    = gamepad2.right_trigger * .6;// * TRY .5 oscilloscope
         double clawClose  = -gamepad2.left_trigger * .5;// * 1.5; //.25 IF YOU SEE JERKIN GLOWER POWER, CANNOT GO OVER .85
@@ -203,7 +203,7 @@ public class RobotTeleopTank_Iterative extends OpMode{
             if (gamepad2.b) armPower = 0;
             vexArmL.setPower( armPower * .8);
             vexArmR.setPower(-armPower * .8);
-            telemetry.addData("armpower ",  "%.2f", armPower);
+            telemetry.addData("armpower ",  "%.2f", armPower);ba
         }*/
 
 
