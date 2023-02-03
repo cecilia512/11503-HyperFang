@@ -187,7 +187,7 @@ public class legomanrightside extends LinearOpMode
         gahr.mover(0);
         sleep(10);
         gahr.clawGetr(0.5);
-        sleep(500);
+        sleep(700);
         gahr.clawGetr(0);
         stop();
         gahr.badLiftMovement(-2000);
